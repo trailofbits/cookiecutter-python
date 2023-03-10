@@ -1,0 +1,29 @@
+{
+    "project_name": "python-project",
+    "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '-') }}",
+    "module_slug": "{{ cookiecutter.project_slug.replace('-', '_') }}",
+    "project_description": "",
+    "repo_type": [
+        "CLI",
+        "library"
+    ],
+    "entry_point": "{{ cookiecutter.project_slug if cookiecutter.repo_type == 'CLI' else '' }}",
+    "author_name": "Trail of Bits",
+    "author_email": "opensource@trailofbits.com",
+    "github_username": "trailofbits",
+    "pypi_username": "trailofbits",
+    "version": "0.0.1",
+    "documentation": [
+        "pdoc",
+        "none"
+    ],
+    "docstring_coverage": true,
+    "license": [
+        "Apache 2.0",
+        "AGPL v3",
+        "Proprietary"
+    ],
+    "_copy_without_render": [
+        ".github/workflows/*.yml"
+    ]
+}
