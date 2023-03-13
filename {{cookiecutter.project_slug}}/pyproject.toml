@@ -44,7 +44,7 @@ lint = [
     "interrogate",
     {%- endif %}
 ]
-dev = ["{{ cookiecutter.project_slug }}[doc,test,lint]", "twine"]
+dev = ["{{ cookiecutter.project_slug }}[doc,test,lint]", "twine", "wheel", "build"]
 
 {% if cookiecutter.entry_point -%}
 [project.scripts]
