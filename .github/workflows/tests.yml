@@ -1,0 +1,32 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  self-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: install cookiecutter
+        run: python -m pip install cookiecutter
+
+      - name: run template
+        run: |
+          cookiecutter --no-input . -o /tmp
+
+          [[ -d /tmp/python-project ]] || { >&2 echo "not generated?"; exit 1; }
+
+          cd /tmp/python-project
+          make dev
+          make test
+          make package
+
