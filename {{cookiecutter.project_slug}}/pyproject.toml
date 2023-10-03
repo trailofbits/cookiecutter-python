@@ -83,7 +83,7 @@ warn_unused_ignores = true
 
 [tool.ruff]
 line-length = 100
-select = ["E", "F", "W", "UP", "I", "N", "YTT", "BLE", "C4", "SIM"]
+select = ["ALL"]
 target-version = "py38"
 
 [tool.interrogate]
