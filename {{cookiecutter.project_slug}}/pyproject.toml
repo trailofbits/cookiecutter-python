@@ -32,10 +32,10 @@ doc = [
 ]
 test = ["pytest", "pytest-cov", "pretend", "coverage[toml]"]
 lint = [
-    "black>=22.3.0",
+    "black ~= 23.0",
     # NOTE: ruff is under active development, so we pin conservatively here
     # and let Dependabot periodically perform this update.
-    "ruff < 0.0.255",
+    "ruff < 0.0.293",
     "mypy >= 1.0",
     "types-html5lib",
     "types-requests",
@@ -85,6 +85,15 @@ warn_unused_ignores = true
 line-length = 100
 select = ["ALL"]
 target-version = "py38"
+
+[tool.ruff.per-file-ignores]
+"{{ cookiecutter.module_slug }}/_cli.py" = [
+    "T201", # allow `print` in cli module
+]
+"test/**/*.py" = [
+    "D",    # no docstrings in tests
+    "S101", # asserts are expected in tests
+]
 
 [tool.interrogate]
 # don't enforce documentation coverage for packaging, testing, the virtual
