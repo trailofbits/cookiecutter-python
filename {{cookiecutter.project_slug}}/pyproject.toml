@@ -87,6 +87,9 @@ select = ["ALL"]
 target-version = "py38"
 
 [tool.ruff.per-file-ignores]
+"{{ cookiecutter.module_slug }}/_cli.py" = [
+    "T201", # allow `print` in cli module
+]
 "test/**/*.py" = [
     "D",    # no docstrings in tests
     "S101", # asserts are expected in tests
