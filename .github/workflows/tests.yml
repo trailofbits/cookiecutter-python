@@ -37,7 +37,7 @@ jobs:
         run: |
           cookiecutter --no-input -o /tmp . project_namespace_import=tob.r_and_e
 
-          [[ -d /tmp/tob-r-and-e-python-project/python_project ]] || { >&2 echo "not generated?"; exit 1; }
+          [[ -d /tmp/tob-r-and-e-python-project/tob/r_and_e/python_project ]] || { >&2 echo "not generated?"; exit 1; }
 
           cd /tmp/tob-r-and-e-python-project
           make dev
