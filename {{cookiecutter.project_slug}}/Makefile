@@ -53,7 +53,8 @@ run: $(VENV)/pyvenv.cfg
 $(VENV)/pyvenv.cfg: pyproject.toml
 	# Create our Python 3 virtual environment
 	python3 -m venv env
-	$(VENV_BIN)/python -m pip install --upgrade pip
+	# TODO(ekilmer): interrogate needs setuptools from 3.12+
+	$(VENV_BIN)/python -m pip install --upgrade pip setuptools
 	$(VENV_BIN)/python -m pip install -e .[$(INSTALL_EXTRA)]
 
 .PHONY: lint
