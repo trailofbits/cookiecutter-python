@@ -1,13 +1,18 @@
 {
-    "project_name": "python-project",
-    "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '-') }}",
-    "module_slug": "{{ cookiecutter.project_slug.replace('-', '_') }}",
+    "project_name": "Python Project",
+    "__module_slug": "{{ cookiecutter.project_name.lower().replace(' ', '-') }}",
+    "__module_import": "{{ cookiecutter.__module_slug.replace('-', '_') }}",
+    "project_namespace_import": "",
+    "__project_namespace_slug": "{{ cookiecutter.project_namespace_import.replace('_', '-').replace('.', '-') }}",
+    "project_slug": "{{ (cookiecutter.__project_namespace_slug + '-' if cookiecutter.project_namespace_import else '') + cookiecutter.__module_slug }}",
+    "__project_import": "{{ (cookiecutter.project_namespace_import + '.' if cookiecutter.project_namespace_import else '') + cookiecutter.__module_import }}",
+    "__project_src_path": "{{ cookiecutter.__project_import.replace('.', '/') }}",
     "project_description": "",
     "repo_type": [
         "CLI",
         "library"
     ],
-    "entry_point": "{{ cookiecutter.project_slug if cookiecutter.repo_type == 'CLI' else '' }}",
+    "entry_point": "{{ cookiecutter.project_slug.rsplit('.', 1)[-1] if cookiecutter.repo_type == 'CLI' else '' }}",
     "author_name": "Trail of Bits",
     "author_email": "opensource@trailofbits.com",
     "github_username": "trailofbits",
@@ -25,5 +30,10 @@
     ],
     "_copy_without_render": [
         ".github/workflows/*.yml"
-    ]
+    ],
+    "__prompts__": {
+        "project_name": "Human-readable project name (translated into module slug and import)",
+        "project_slug": "The repo and pip install name",
+        "project_namespace_import": "Optional package namespace (must be valid package import)"
+    }
 }
