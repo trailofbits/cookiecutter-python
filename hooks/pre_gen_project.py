@@ -28,7 +28,7 @@ if not re.match(PROJECT_SLUG_REGEX, project_slug):
 
 ENTRY_POINT_REGEX = PROJECT_SLUG_REGEX
 entry_point = "{{ cookiecutter.entry_point }}"
-if not re.match(ENTRY_POINT_REGEX, entry_point):
+if entry_point and not re.match(ENTRY_POINT_REGEX, entry_point):
     print(f"ERROR: '{entry_point}' is not a valid project entry point!")
     print(f"       It must follow regex '{ENTRY_POINT_REGEX}'")
     sys.exit(1)

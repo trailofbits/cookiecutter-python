@@ -32,6 +32,22 @@ jobs:
           make test
           make package
           make doc
+          cd .. && rm -rf /tmp/python-project
+
+      - name: run template (no entry point)
+        run: |
+          cookiecutter --no-input -o /tmp . entry_point=''
+
+          [[ ! -f /tmp/python-project/python_project/__main__.py ]] || { >&2 echo "not expecting main"; exit 1; }
+
+          cd /tmp/python-project
+          make dev
+          make reformat
+          make lint
+          make test
+          make package
+          make doc
+          cd .. && rm -rf /tmp/python-project
 
       - name: run template (namespace)
         run: |
@@ -46,6 +62,7 @@ jobs:
           make test
           make package
           make doc
+          cd .. && rm -rf /tmp/tob-r-and-e-python-project
 
       - name: run template (namespace, short slug)
         run: |
@@ -60,3 +77,4 @@ jobs:
           make test
           make package
           make doc
+          cd .. && rm -rf /tmp/bit-trails
