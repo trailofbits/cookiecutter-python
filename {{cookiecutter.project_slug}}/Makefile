@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 
-PY_SRC_DIR := {{ cookiecutter.__project_src_path }}
-PY_IMPORT := {{ cookiecutter.__project_import }}
+PY_SRC_DIR = {{ cookiecutter.__project_src_path }}
+PY_IMPORT = {{ cookiecutter.__project_import }}
 
 ALL_PY_SRCS := $(shell find $(PY_SRC_DIR) -name '*.py') \
 	$(shell find test -name '*.py')
