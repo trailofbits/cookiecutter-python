@@ -53,7 +53,8 @@ run: $(VENV)/pyvenv.cfg
 $(VENV)/pyvenv.cfg: pyproject.toml
 	# Create our Python 3 virtual environment
 	python3 -m venv env
-	# TODO(ekilmer): interrogate needs setuptools from 3.12+
+	# NOTE(ekilmer): interrogate v1.5.0 needs setuptools when using Python 3.12+.
+	# This should be fixed when the next release is made
 	$(VENV_BIN)/python -m pip install --upgrade pip setuptools
 	$(VENV_BIN)/python -m pip install -e .[$(INSTALL_EXTRA)]
 
