@@ -1,8 +1,9 @@
 SHELL := /bin/bash
 
-PY_MODULE := {{ cookiecutter.module_slug }}
+PY_SRC_DIR = {{ cookiecutter.__project_src_path }}
+PY_IMPORT = {{ cookiecutter.__project_import }}
 
-ALL_PY_SRCS := $(shell find $(PY_MODULE) -name '*.py') \
+ALL_PY_SRCS := $(shell find $(PY_SRC_DIR) -name '*.py') \
 	$(shell find test -name '*.py')
 
 # Optionally overriden by the user, if they're using a virtual environment manager.
@@ -52,7 +53,9 @@ run: $(VENV)/pyvenv.cfg
 $(VENV)/pyvenv.cfg: pyproject.toml
 	# Create our Python 3 virtual environment
 	python3 -m venv env
-	$(VENV_BIN)/python -m pip install --upgrade pip
+	# NOTE(ekilmer): interrogate v1.5.0 needs setuptools when using Python 3.12+.
+	# This should be fixed when the next release is made
+	$(VENV_BIN)/python -m pip install --upgrade pip setuptools
 	$(VENV_BIN)/python -m pip install -e .[$(INSTALL_EXTRA)]
 
 .PHONY: lint
@@ -60,7 +63,7 @@ lint: $(VENV)/pyvenv.cfg
 	. $(VENV_BIN)/activate && \
 		black --check $(ALL_PY_SRCS) && \
 		ruff $(ALL_PY_SRCS) && \
-		mypy $(PY_MODULE)
+		mypy
 
 	{%- if cookiecutter.docstring_coverage %}
 	. $(VENV_BIN)/activate && \
@@ -76,13 +79,13 @@ reformat:
 .PHONY: test tests
 test tests: $(VENV)/pyvenv.cfg
 	. $(VENV_BIN)/activate && \
-		pytest --cov=$(PY_MODULE) $(T) $(TEST_ARGS) && \
+		pytest --cov=$(PY_IMPORT) $(T) $(TEST_ARGS) && \
 		python -m coverage report -m $(COV_ARGS)
 
 .PHONY: doc
 doc: $(VENV)/pyvenv.cfg
 	. $(VENV_BIN)/activate && \
-		pdoc -o html $(PY_MODULE)
+		pdoc -o html $(PY_IMPORT)
 
 .PHONY: package
 package: $(VENV)/pyvenv.cfg

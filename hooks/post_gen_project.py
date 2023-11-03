@@ -3,8 +3,8 @@ import sys
 
 REMOVE_PATHS = [
     # We delete _cli.py and __main__.py if we're not generating a CLI.
-    "{% if cookiecutter.entry_point == '' %} {{ cookiecutter.module_slug }}/_cli.py {% endif %}",
-    "{% if cookiecutter.entry_point == '' %} {{ cookiecutter.module_slug }}/__main__.py {% endif %}",
+    "{% if cookiecutter.entry_point == '' %} {{ cookiecutter.__project_src_path }}/_cli.py {% endif %}",
+    "{% if cookiecutter.entry_point == '' %} {{ cookiecutter.__project_src_path }}/__main__.py {% endif %}",
 ]
 
 for path in REMOVE_PATHS:
@@ -14,3 +14,12 @@ for path in REMOVE_PATHS:
             os.rmdir(path)
         else:
             os.unlink(path)
+
+# Potentially new directory for namespace project
+namespace_project_dir = os.path.join(
+    os.getcwd(), "{{ cookiecutter.__project_src_path }}"
+)
+if not os.path.exists(namespace_project_dir):
+    module_dir = os.path.join(os.getcwd(), "{{ cookiecutter.__module_import }}")
+    os.makedirs(namespace_project_dir)
+    os.rename(module_dir, os.path.join(namespace_project_dir))

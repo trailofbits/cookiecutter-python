@@ -1,5 +1,5 @@
 [build-system]
-requires = ["flit_core >=3.2,<4"]
+requires = ["flit_core >=3.5,<4"]
 build-backend = "flit_core.buildapi"
 
 [project]
@@ -48,7 +48,7 @@ dev = ["{{ cookiecutter.project_slug }}[doc,test,lint]", "twine", "wheel", "buil
 
 {% if cookiecutter.entry_point -%}
 [project.scripts]
-"{{ cookiecutter.entry_point }}" = "{{ cookiecutter.module_slug }}._cli:main"
+"{{ cookiecutter.entry_point }}" = "{{ cookiecutter.__project_import }}._cli:main"
 {%- endif %}
 
 [project.urls]
@@ -57,14 +57,18 @@ Documentation = "https://{{ cookiecutter.github_username }}.github.io/{{ cookiec
 Issues = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/issues"
 Source = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}"
 
+[tool.flit.module]
+name = "{{ cookiecutter.__project_import }}"
+
 [tool.black]
 line-length = 100
 
 [tool.coverage.run]
 # don't attempt code coverage for the CLI entrypoints
-omit = ["{{ cookiecutter.module_slug }}/_cli.py"]
+omit = ["{{ cookiecutter.__project_src_path }}/_cli.py"]
 
 [tool.mypy]
+packages = "{{ cookiecutter.__project_import }}"
 allow_redefinition = true
 check_untyped_defs = true
 disallow_incomplete_defs = true
@@ -87,7 +91,7 @@ select = ["ALL"]
 target-version = "py38"
 
 [tool.ruff.per-file-ignores]
-"{{ cookiecutter.module_slug }}/_cli.py" = [
+"{{ cookiecutter.__project_src_path }}/_cli.py" = [
     "T201", # allow `print` in cli module
 ]
 "test/**/*.py" = [
@@ -98,6 +102,6 @@ target-version = "py38"
 [tool.interrogate]
 # don't enforce documentation coverage for packaging, testing, the virtual
 # environment, or the CLI (which is documented separately).
-exclude = ["env", "test", "{{ cookiecutter.module_slug }}/_cli.py"]
+exclude = ["env", "test", "{{ cookiecutter.__project_src_path }}/_cli.py"]
 ignore-semiprivate = true
 fail-under = 100
