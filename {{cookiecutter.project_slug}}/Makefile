@@ -1,9 +1,8 @@
 SHELL := /bin/bash
 
-PY_SRC_DIR = {{ cookiecutter.__project_src_path }}
 PY_IMPORT = {{ cookiecutter.__project_import }}
 
-ALL_PY_SRCS := $(shell find $(PY_SRC_DIR) -name '*.py') \
+ALL_PY_SRCS := $(shell find src -name '*.py') \
 	$(shell find test -name '*.py')
 
 # Optionally overriden by the user, if they're using a virtual environment manager.

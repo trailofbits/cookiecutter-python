@@ -6,7 +6,7 @@
     "__project_namespace_slug": "{{ cookiecutter.project_namespace_import.replace('_', '-').replace('.', '-') }}",
     "project_slug": "{{ (cookiecutter.__project_namespace_slug + '-' if cookiecutter.project_namespace_import else '') + cookiecutter.__module_slug }}",
     "__project_import": "{{ (cookiecutter.project_namespace_import + '.' if cookiecutter.project_namespace_import else '') + cookiecutter.__module_import }}",
-    "__project_src_path": "{{ cookiecutter.__project_import.replace('.', '/') }}",
+    "__project_src_path": "src/{{ cookiecutter.__project_import.replace('.', '/') }}",
     "project_description": "",
     "repo_type": [
         "CLI",

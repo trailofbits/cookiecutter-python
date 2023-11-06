@@ -68,6 +68,7 @@ line-length = 100
 omit = ["{{ cookiecutter.__project_src_path }}/_cli.py"]
 
 [tool.mypy]
+mypy_path = "src"
 packages = "{{ cookiecutter.__project_import }}"
 allow_redefinition = true
 check_untyped_defs = true

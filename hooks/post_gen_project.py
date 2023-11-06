@@ -20,6 +20,6 @@ namespace_project_dir = os.path.join(
     os.getcwd(), "{{ cookiecutter.__project_src_path }}"
 )
 if not os.path.exists(namespace_project_dir):
-    module_dir = os.path.join(os.getcwd(), "{{ cookiecutter.__module_import }}")
+    module_dir = os.path.join(os.getcwd(), "src", "{{ cookiecutter.__module_import }}")
     os.makedirs(namespace_project_dir)
     os.rename(module_dir, os.path.join(namespace_project_dir))
