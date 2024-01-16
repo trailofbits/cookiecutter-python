@@ -13,8 +13,11 @@ Both command-line and library packages can be generated.
 
 Install the `cookiecutter` CLI:
 
-```
+```bash
 python -m pip install cookiecutter
+
+# or, if you have pipx
+pipx install cookiecutter
 ```
 
 Use `cookiecutter` to generate a project using this template:
