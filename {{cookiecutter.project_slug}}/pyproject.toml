@@ -88,8 +88,10 @@ warn_unused_ignores = true
 
 [tool.ruff]
 line-length = 100
-select = ["ALL"]
 target-version = "py38"
+
+[tool.ruff.lint]
+select = ["ALL"]
 
 [tool.ruff.per-file-ignores]
 "{{ cookiecutter.__project_src_path }}/_cli.py" = [
