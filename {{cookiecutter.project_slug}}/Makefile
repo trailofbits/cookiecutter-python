@@ -60,7 +60,7 @@ $(VENV)/pyvenv.cfg: pyproject.toml
 .PHONY: lint
 lint: $(VENV)/pyvenv.cfg
 	. $(VENV_BIN)/activate && \
-		black --check $(ALL_PY_SRCS) && \
+		ruff format --check $(ALL_PY_SRCS) && \
 		ruff $(ALL_PY_SRCS) && \
 		mypy
 
@@ -73,7 +73,7 @@ lint: $(VENV)/pyvenv.cfg
 reformat:
 	. $(VENV_BIN)/activate && \
 		ruff --fix $(ALL_PY_SRCS) && \
-		black $(ALL_PY_SRCS)
+		ruff format $(ALL_PY_SRCS)
 
 .PHONY: test tests
 test tests: $(VENV)/pyvenv.cfg
