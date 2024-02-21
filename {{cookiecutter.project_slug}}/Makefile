@@ -82,9 +82,14 @@ test tests: $(VENV)/pyvenv.cfg
 		python -m coverage report -m $(COV_ARGS)
 
 .PHONY: doc
+{%- if cookiecutter.documentation == 'pdoc' %}
 doc: $(VENV)/pyvenv.cfg
 	. $(VENV_BIN)/activate && \
 		pdoc -o html $(PY_IMPORT)
+{%- elif cookiecutter.documentation == 'none' %}
+doc:
+	@echo "No documentation set up"
+{%- endif %}
 
 .PHONY: package
 package: $(VENV)/pyvenv.cfg

@@ -78,3 +78,19 @@ jobs:
           make package
           make doc
           cd .. && rm -rf /tmp/bit-trails
+
+      - name: run template (no docs)
+        run: |
+          cookiecutter --no-input -o /tmp . documentation='none'
+
+          [[ -d /tmp/python-project/src/python_project ]] || { >&2 echo "not generated?"; exit 1; }
+          [[ ! -f /tmp/python-project/.github/workflows/docs.yml ]] || { >&2 echo "not expecting docs.yml"; exit 1; }
+
+          cd /tmp/python-project
+          make dev
+          make reformat
+          make lint
+          make test
+          make package
+          make doc
+          cd .. && rm -rf /tmp/python-project
