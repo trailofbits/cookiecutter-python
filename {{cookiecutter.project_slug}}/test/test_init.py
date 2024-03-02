@@ -1,4 +1,5 @@
 """Initial testing module."""
+
 import {{ cookiecutter.__project_import }}
 
 
