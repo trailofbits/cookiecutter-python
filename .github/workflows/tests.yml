@@ -19,11 +19,11 @@ jobs:
       - name: install cookiecutter
         run: python -m pip install cookiecutter
 
-        # See this PR for more details https://github.com/actions/checkout/pull/1184#issue-1595060720
-      - name: setup GitHub bot git committer
+        # we need the git config setup here to make sure the subsequent git commit in each test works
+      - name: setup fake git committer
         run: |
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
+          git config --global user.email "fake@example.com"
+          git config --global user.name "fake"
 
       - name: run template (default)
         run: |
