@@ -19,6 +19,12 @@ jobs:
       - name: install cookiecutter
         run: python -m pip install cookiecutter
 
+        # we need the git config setup here to make sure the subsequent git commit in each test works
+      - name: setup fake git committer
+        run: |
+          git config --global user.email "fake@example.com"
+          git config --global user.name "fake"
+
       - name: run template (default)
         run: |
           cookiecutter --no-input -o /tmp .
@@ -26,8 +32,12 @@ jobs:
           [[ -d /tmp/python-project/src/python_project ]] || { >&2 echo "not generated?"; exit 1; }
 
           cd /tmp/python-project
+          git init . && git add . && git commit -m "Initial commit"
           make dev
           make reformat
+
+          git diff --exit-code || { >&2 echo "please reformat"; exit 1; }
+
           make lint
           make test
           make package
@@ -41,8 +51,12 @@ jobs:
           [[ ! -f /tmp/python-project/python_project/__main__.py ]] || { >&2 echo "not expecting main"; exit 1; }
 
           cd /tmp/python-project
+          git init . && git add . && git commit -m "Initial commit"
           make dev
           make reformat
+
+          git diff --exit-code || { >&2 echo "please reformat"; exit 1; }
+
           make lint
           make test
           make package
@@ -56,8 +70,12 @@ jobs:
           [[ -d /tmp/tob-r-and-e-python-project/src/tob/r_and_e/python_project ]] || { >&2 echo "not generated?"; exit 1; }
 
           cd /tmp/tob-r-and-e-python-project
+          git init . && git add . && git commit -m "Initial commit"
           make dev
           make reformat
+
+          git diff --exit-code || { >&2 echo "please reformat"; exit 1; }
+
           make lint
           make test
           make package
@@ -71,8 +89,12 @@ jobs:
           [[ -d /tmp/bit-trails/src/tob/r_and_e/bit_trails ]] || { >&2 echo "not generated?"; exit 1; }
 
           cd /tmp/bit-trails
+          git init . && git add . && git commit -m "Initial commit"
           make dev
           make reformat
+
+          git diff --exit-code || { >&2 echo "please reformat"; exit 1; }
+
           make lint
           make test
           make package
@@ -87,8 +109,12 @@ jobs:
           [[ ! -f /tmp/python-project/.github/workflows/docs.yml ]] || { >&2 echo "not expecting docs.yml"; exit 1; }
 
           cd /tmp/python-project
+          git init . && git add . && git commit -m "Initial commit"
           make dev
           make reformat
+
+          git diff --exit-code || { >&2 echo "please reformat"; exit 1; }
+
           make lint
           make test
           make package
