@@ -7,6 +7,7 @@ name: release
 
 permissions:
   # Used to sign the release's artifacts with sigstore-python.
+  # Used to publish to PyPI with Trusted Publishing.
   id-token: write
 
   # Used to attach signing artifacts to the published release.
@@ -33,9 +34,6 @@ jobs:
 
     - name: publish
       uses: pypa/gh-action-pypi-publish@release/v1
-      with:
-        user: __token__
-        password: ${{ secrets.PYPI_TOKEN }}
 
     - name: sign
       uses: sigstore/gh-action-sigstore-python@v1.2.1
