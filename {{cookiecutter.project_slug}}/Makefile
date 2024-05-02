@@ -60,8 +60,8 @@ $(VENV)/pyvenv.cfg: pyproject.toml
 .PHONY: lint
 lint: $(VENV)/pyvenv.cfg
 	. $(VENV_BIN)/activate && \
-		ruff format --check $(ALL_PY_SRCS) && \
-		ruff check $(ALL_PY_SRCS) && \
+		ruff format --check && \
+		ruff check && \
 		mypy
 
 	{%- if cookiecutter.docstring_coverage %}
@@ -72,8 +72,8 @@ lint: $(VENV)/pyvenv.cfg
 .PHONY: reformat
 reformat:
 	. $(VENV_BIN)/activate && \
-		ruff check --fix $(ALL_PY_SRCS) && \
-		ruff format $(ALL_PY_SRCS)
+		ruff check --fix && \
+		ruff format
 
 .PHONY: test tests
 test tests: $(VENV)/pyvenv.cfg
