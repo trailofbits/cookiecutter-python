@@ -50,8 +50,7 @@ run: $(VENV)/pyvenv.cfg
 {%- endif %}
 
 $(VENV)/pyvenv.cfg: pyproject.toml
-	# Create our Python 3 virtual environment
-	python3 -m venv env
+	python -m venv env
 	$(VENV_BIN)/python -m pip install -e .[$(INSTALL_EXTRA)]
 
 .PHONY: lint
@@ -90,8 +89,7 @@ doc:
 
 .PHONY: package
 package: $(VENV)/pyvenv.cfg
-	. $(VENV_BIN)/activate && \
-		python3 -m build
+	$(VENV_BIN)/python -m build
 
 .PHONY: edit
 edit:
