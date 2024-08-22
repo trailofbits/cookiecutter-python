@@ -48,4 +48,5 @@ metadata.
 The project will be generated using `uv`, a near drop-in replacement for 
 `pip` which is still in active development.
 
-Packages should be installed using
+Packages either installed using `uv pip install <package_name>` (after 
+activating the virtual environment).
