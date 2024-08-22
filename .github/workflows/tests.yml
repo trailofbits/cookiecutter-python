@@ -18,8 +18,12 @@ jobs:
         with:
           python-version: "3.x"
 
-      - name: install cookiecutter
-        run: python -m pip install cookiecutter
+      - name: install uv
+        run: >
+          curl --no-progress-meter --location --fail
+          --proto '=https' --tlsv1.2
+          "https://astral.sh/uv/install.sh"
+          | sh
 
         # we need the git config setup here to make sure the subsequent git commit in each test works
       - name: setup fake git committer
@@ -29,7 +33,7 @@ jobs:
 
       - name: run template (default)
         run: |
-          cookiecutter --no-input -o /tmp .
+          uvx cookiecutter --no-input -o /tmp .
 
           [[ -d /tmp/python-project/src/python_project ]] || { >&2 echo "not generated?"; exit 1; }
 
@@ -48,7 +52,7 @@ jobs:
 
       - name: run template (no entry point)
         run: |
-          cookiecutter --no-input -o /tmp . entry_point=''
+          uvx cookiecutter --no-input -o /tmp . entry_point=''
 
           [[ ! -f /tmp/python-project/python_project/__main__.py ]] || { >&2 echo "not expecting main"; exit 1; }
 
@@ -67,7 +71,7 @@ jobs:
 
       - name: run template (namespace)
         run: |
-          cookiecutter --no-input -o /tmp . project_namespace_import=tob.r_and_e
+          uvx cookiecutter --no-input -o /tmp . project_namespace_import=tob.r_and_e
 
           [[ -d /tmp/tob-r-and-e-python-project/src/tob/r_and_e/python_project ]] || { >&2 echo "not generated?"; exit 1; }
 
@@ -86,7 +90,7 @@ jobs:
 
       - name: run template (namespace, short slug)
         run: |
-          cookiecutter --no-input -o /tmp . project_namespace_import=tob.r_and_e "project_name=Bit Trails" project_slug=bit-trails
+          uvx cookiecutter --no-input -o /tmp . project_namespace_import=tob.r_and_e "project_name=Bit Trails" project_slug=bit-trails
 
           [[ -d /tmp/bit-trails/src/tob/r_and_e/bit_trails ]] || { >&2 echo "not generated?"; exit 1; }
 
@@ -105,7 +109,7 @@ jobs:
 
       - name: run template (no docs)
         run: |
-          cookiecutter --no-input -o /tmp . documentation='none'
+          uvx cookiecutter --no-input -o /tmp . documentation='none'
 
           [[ -d /tmp/python-project/src/python_project ]] || { >&2 echo "not generated?"; exit 1; }
           [[ ! -f /tmp/python-project/.github/workflows/docs.yml ]] || { >&2 echo "not expecting docs.yml"; exit 1; }
