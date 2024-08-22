@@ -46,12 +46,14 @@ dev: $(VENV)/pyvenv.cfg
 {%- if cookiecutter.entry_point %}
 .PHONY: run
 run: $(VENV)/pyvenv.cfg
+	# Once we can specify the default VENV name in uv, use `uv run` here
+	# https://github.com/astral-sh/uv/issues/1422
 	@. $(VENV_BIN)/activate && {{ cookiecutter.entry_point }} $(ARGS)
 {%- endif %}
 
 $(VENV)/pyvenv.cfg: pyproject.toml
-	python -m venv env
-	$(VENV_BIN)/python -m pip install -e .[$(INSTALL_EXTRA)]
+	uv venv env
+	@. $(VENV_BIN)/activate && uv pip install -e '.[$(INSTALL_EXTRA)]'
 
 .PHONY: lint
 lint: $(VENV)/pyvenv.cfg
@@ -68,8 +70,8 @@ lint: $(VENV)/pyvenv.cfg
 .PHONY: reformat
 reformat:
 	. $(VENV_BIN)/activate && \
-		ruff check --fix && \
-		ruff format
+	    ruff format && \
+		ruff check --fix
 
 .PHONY: test tests
 test tests: $(VENV)/pyvenv.cfg
@@ -89,7 +91,7 @@ doc:
 
 .PHONY: package
 package: $(VENV)/pyvenv.cfg
-	$(VENV_BIN)/python -m build
+	uvx --from build pyproject-build --installer uv
 
 .PHONY: edit
 edit:

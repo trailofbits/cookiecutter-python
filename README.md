@@ -11,28 +11,41 @@ Both command-line and library packages can be generated.
 
 ## Usage
 
-Install the `cookiecutter` CLI:
+- Install [`uv`](https://docs.astral.sh/uv/)
 
 ```bash
-python -m pip install cookiecutter
+# On any platform with cURL and sh
+curl -LsSf https://astral.sh/uv/install.sh | sh
 
-# or, if you have pipx
-pipx install cookiecutter
+# On Windows
+powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+
+# With Brew
+brew install uv
 ```
 
-Use `cookiecutter` to generate a project using this template:
+Please refer to [`uv` documentation](https://docs.astral.sh/uv/getting-started/installation/) for more installation options.
+
+- Use `cookiecutter` to generate a project using this template:
 
 ```bash
 # creates the project directory in $PWD
-cookiecutter gh:trailofbits/cookiecutter-python
+uvx cookiecutter gh:trailofbits/cookiecutter-python
 ```
 
 Alternatively, tell `cookiecutter` where to put the new project directory:
 
 ```bash
 # creates ~/tmp/$project
-cookiecutter -o ~/tmp gh:trailofbits/cookiecutter-python
+uvx cookiecutter -o ~/tmp gh:trailofbits/cookiecutter-python
 ```
 
 `cookiecutter` will prompt you for the project's name and all other relevant
 metadata.
+
+## Note
+
+The project will be generated using `uv`, a near drop-in replacement for 
+`pip` which is still in active development.
+
+Packages should be installed using
