@@ -52,7 +52,7 @@ run: $(VENV)/pyvenv.cfg
 {%- endif %}
 
 $(VENV)/pyvenv.cfg: pyproject.toml
-	uv venv env
+	uv venv $(VENV)
 	@. $(VENV_BIN)/activate && uv pip install -e '.[$(INSTALL_EXTRA)]'
 
 .PHONY: lint
