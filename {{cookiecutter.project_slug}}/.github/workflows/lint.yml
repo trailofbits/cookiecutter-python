@@ -17,6 +17,13 @@ jobs:
           python-version-file: pyproject.toml
           cache: "pip"
           cache-dependency-path: pyproject.toml
+      
+      - name: install uv
+        run: >
+          curl --no-progress-meter --location --fail
+          --proto '=https' --tlsv1.2
+          "https://astral.sh/uv/install.sh"
+          | sh
 
       - name: lint
         run: make lint INSTALL_EXTRA=lint
