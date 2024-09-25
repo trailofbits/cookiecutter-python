@@ -19,18 +19,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
         with:
-          python-version: ${{ matrix.python }}
-          # cache: "uv"  # Wait on https://github.com/actions/setup-python/pull/818 to be merged
-          # cache-dependency-path: pyproject.toml
-      
-      - name: install uv
-        run: >
-          curl --no-progress-meter --location --fail
-          --proto '=https' --tlsv1.2
-          "https://astral.sh/uv/install.sh"
-          | sh
+          enable-cache: true
+          cache-dependency-glob: pyproject.toml
+
+      - name: Install Python ${{ matrix.python }}
+        run: uv python install ${{ matrix.python }}
 
       - name: test
         run: make test INSTALL_EXTRA=test
