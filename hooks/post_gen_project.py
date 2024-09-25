@@ -1,5 +1,4 @@
 import os
-import sys
 
 REMOVE_PATHS = [
     # We delete _cli.py and __main__.py if we're not generating a CLI.

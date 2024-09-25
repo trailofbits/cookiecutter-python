@@ -24,6 +24,13 @@ jobs:
           python-version: ${{ matrix.python }}
           cache: "pip"
           cache-dependency-path: pyproject.toml
+      
+      - name: install uv
+        run: >
+          curl --no-progress-meter --location --fail
+          --proto '=https' --tlsv1.2
+          "https://astral.sh/uv/install.sh"
+          | sh
 
       - name: test
         run: make test INSTALL_EXTRA=test
