@@ -15,8 +15,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version-file: pyproject.toml
-          cache: "pip"
-          cache-dependency-path: pyproject.toml
+          # cache: "uv"  # Wait on https://github.com/actions/setup-python/pull/818 to be merged
+          # cache-dependency-path: pyproject.toml
       
       - name: install uv
         run: >
