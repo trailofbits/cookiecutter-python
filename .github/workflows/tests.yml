@@ -14,18 +14,13 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: actions/setup-python@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
         with:
-          python-version: "3.x"
+          enable-cache: true
+          cache-dependency-glob: cookiecutter.json
 
-      - name: install uv
-        run: >
-          curl --no-progress-meter --location --fail
-          --proto '=https' --tlsv1.2
-          "https://astral.sh/uv/install.sh"
-          | sh
-
-        # we need the git config setup here to make sure the subsequent git commit in each test works
+      # we need the git config setup here to make sure the subsequent git commit in each test works
       - name: setup fake git committer
         run: |
           git config --global user.email "fake@example.com"
