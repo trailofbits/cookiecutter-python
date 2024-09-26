@@ -18,6 +18,7 @@ jobs:
         uses: astral-sh/setup-uv@v3
         with:
           enable-cache: true
+          cache-dependency-glob: cookiecutter.json
 
       # we need the git config setup here to make sure the subsequent git commit in each test works
       - name: setup fake git committer
