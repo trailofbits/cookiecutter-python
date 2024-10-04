@@ -10,9 +10,6 @@ permissions:
   # Used to publish to PyPI with Trusted Publishing.
   id-token: write
 
-  # Used to attach signing artifacts to the published release.
-  contents: write
-
 jobs:
   pypi:
     name: upload release to PyPI
@@ -33,9 +30,5 @@ jobs:
 
     - name: publish
       uses: pypa/gh-action-pypi-publish@release/v1
-
-    - name: sign
-      uses: sigstore/gh-action-sigstore-python@v2.1.1
       with:
-        inputs: ./dist/*.tar.gz ./dist/*.whl
-        release-signing-artifacts: true
+        attestations: true
