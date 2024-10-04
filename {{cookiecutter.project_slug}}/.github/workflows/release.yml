@@ -10,9 +10,6 @@ permissions:
   # Used to publish to PyPI with Trusted Publishing.
   id-token: write
 
-  # Used to attach signing artifacts to the published release.
-  contents: write
-
 jobs:
   pypi:
     name: upload release to PyPI
