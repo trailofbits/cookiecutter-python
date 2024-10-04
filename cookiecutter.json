@@ -29,7 +29,9 @@
         "Proprietary"
     ],
     "_copy_without_render": [
-        ".github/workflows/*.yml"
+        ".github/workflows/docs.yml",
+        ".github/workflows/lint.yml",
+        ".github/workflows/tests.yml"
     ],
     "__prompts__": {
         "project_name": "Human-readable project name (translated into module slug and import)",
