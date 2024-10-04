@@ -91,7 +91,7 @@ doc:
 
 .PHONY: package
 package: $(VENV)/pyvenv.cfg
-	uvx --from build pyproject-build --installer uv
+	uv build
 
 .PHONY: edit
 edit:
