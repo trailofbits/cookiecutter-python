@@ -43,7 +43,7 @@ jobs:
           name: distributions
           path: dist/
       - name: Generate build provenance
-        uses: actions/attest-build-provenance@v1
+        uses: actions/attest-build-provenance@v2
         with:
           subject-path: 'dist/*'
 
