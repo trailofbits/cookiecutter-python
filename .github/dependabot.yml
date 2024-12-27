@@ -1,0 +1,18 @@
+version: 2
+
+updates:
+  # Skipping Python dependencies as pyproject.toml contains template variables
+  # that prevent proper parsing
+
+  # Update GitHub Actions of both the template and the repo
+  - package-ecosystem: github-actions
+    directories:
+        - "/"
+    schedule:
+      interval: daily
+
+  - package-ecosystem: github-actions
+    directories:
+        - "{{cookiecutter.project_slug}}/.github/workflows"
+    schedule:
+      interval: daily
