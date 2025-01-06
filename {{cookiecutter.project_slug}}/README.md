@@ -8,7 +8,7 @@
 
 {{ cookiecutter.project_description }}
 
-# License
+## License
 {%- if cookiecutter.license == "Apache 2.0" %}
 ```
 Copyright {% now 'local', '%Y' %} {{ cookiecutter.author_name }}
