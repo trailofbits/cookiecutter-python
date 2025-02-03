@@ -6,7 +6,9 @@ ALL_PY_SRCS := $(shell find src -name '*.py') \
 	$(shell find test -name '*.py')
 
 # Optionally overriden by the user, if they're using a virtual environment manager.
-VENV ?= env
+# Warning: changing this name to something else than '.venv' will make working with
+# uv harder.
+VENV ?= .venv
 
 # On Windows, venv scripts/shims are under `Scripts` instead of `bin`.
 VENV_BIN := $(VENV)/bin
@@ -46,44 +48,37 @@ dev: $(VENV)/pyvenv.cfg
 {%- if cookiecutter.entry_point %}
 .PHONY: run
 run: $(VENV)/pyvenv.cfg
-	# Once we can specify the default VENV name in uv, use `uv run` here
-	# https://github.com/astral-sh/uv/issues/1422
-	@. $(VENV_BIN)/activate && {{ cookiecutter.entry_point }} $(ARGS)
+	uv run {{ cookiecutter.entry_point }} $(ARGS)
 {%- endif %}
 
 $(VENV)/pyvenv.cfg: pyproject.toml
 	uv venv $(VENV)
-	@. $(VENV_BIN)/activate && uv pip install -e '.[$(INSTALL_EXTRA)]'
+	uv pip install -e '.[$(INSTALL_EXTRA)]'
 
 .PHONY: lint
 lint: $(VENV)/pyvenv.cfg
-	. $(VENV_BIN)/activate && \
-		ruff format --check && \
-		ruff check && \
-		mypy
+	uv run ruff format --check && \
+		uv run ruff check && \
+		uv run mypy
 
 	{%- if cookiecutter.docstring_coverage %}
-	. $(VENV_BIN)/activate && \
-		interrogate -c pyproject.toml .
+		uv run interrogate -c pyproject.toml .
 	{%- endif %}
 
 .PHONY: reformat
 reformat:
-	. $(VENV_BIN)/activate && \
-	    ruff format && \
-		ruff check --fix
+	uv run ruff format && \
+		uv run ruff check --fix
 
 .PHONY: test tests
 test tests: $(VENV)/pyvenv.cfg
-	. $(VENV_BIN)/activate && \
-		pytest --cov=$(PY_IMPORT) $(T) $(TEST_ARGS) && \
-		python -m coverage report -m $(COV_ARGS)
+	uv run pytest --cov=$(PY_IMPORT) $(T) $(TEST_ARGS)
+	uv run coverage report -m $(COV_ARGS)
 
 .PHONY: doc
 {%- if cookiecutter.documentation == 'pdoc' %}
 doc: $(VENV)/pyvenv.cfg
-	. $(VENV_BIN)/activate && \
-		pdoc -o html $(PY_IMPORT)
+	uv run pdoc -o html $(PY_IMPORT)
 {%- elif cookiecutter.documentation == 'none' %}
 doc:
 	@echo "No documentation set up"
