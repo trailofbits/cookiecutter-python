@@ -23,7 +23,7 @@ requires-python = ">=3.9"
 [tool.setuptools.dynamic]
 version = { attr = "{{ cookiecutter.__project_import }}.__version__" }
 
-[project.optional-dependencies]
+[dependency-groups]
 doc = [
     {%- if cookiecutter.documentation == "pdoc" -%}
     "pdoc"
@@ -42,7 +42,7 @@ lint = [
     "interrogate",
     {%- endif %}
 ]
-dev = ["{{ cookiecutter.project_slug }}[doc,test,lint]", "twine", "build"]
+dev = [{include-group = "doc"}, {include-group = "test"}, {include-group = "lint"}, "twine", "build"]
 
 {% if cookiecutter.entry_point -%}
 [project.scripts]

@@ -53,7 +53,7 @@ run: $(VENV)/pyvenv.cfg
 
 $(VENV)/pyvenv.cfg: pyproject.toml
 	uv venv $(VENV)
-	uv pip install -e '.[$(INSTALL_EXTRA)]'
+	uv sync --group '$(INSTALL_EXTRA)'
 
 .PHONY: lint
 lint: $(VENV)/pyvenv.cfg
