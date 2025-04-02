@@ -20,6 +20,13 @@ classifiers = [
 dependencies = []
 requires-python = ">=3.9"
 
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "{{ cookiecutter.__project_src_path }}/__init__.py"
+
 [tool.setuptools.dynamic]
 version = { attr = "{{ cookiecutter.__project_import }}.__version__" }
 
@@ -42,7 +49,14 @@ lint = [
     "interrogate",
     {%- endif %}
 ]
-dev = [{include-group = "doc"}, {include-group = "test"}, {include-group = "lint"}, "twine", "build"]
+dev = [
+    {include-group = "doc"},
+    {include-group = "test"},
+    {include-group = "lint"},
+    "twine",
+    "build",
+    "{{ cookiecutter.project_slug }}",
+]
 
 {% if cookiecutter.entry_point -%}
 [project.scripts]
@@ -108,3 +122,6 @@ exclude = ["env", "test", "{{ cookiecutter.__project_src_path }}/_cli.py"]
 ignore-semiprivate = true
 fail-under = 100
 {%- endif %}
+
+[tool.uv.sources]
+{{ cookiecutter.project_slug }} = { workspace = true }
