@@ -27,6 +27,9 @@ build-backend = "hatchling.build"
 [tool.hatch.version]
 path = "{{ cookiecutter.__project_src_path }}/__init__.py"
 
+[tool.hatch.build.targets.wheel]
+packages = ["{{ cookiecutter.__project_src_path }}"]
+
 [tool.setuptools.dynamic]
 version = { attr = "{{ cookiecutter.__project_import }}.__version__" }
 
