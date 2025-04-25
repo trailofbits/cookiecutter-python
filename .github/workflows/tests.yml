@@ -15,9 +15,8 @@ jobs:
           persist-credentials: false
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v5
+        uses: astral-sh/setup-uv@c7f87aa956e4c323abf06d5dec078e358f6b4d04 # v6
         with:
-          enable-cache: true
           cache-dependency-glob: cookiecutter.json
 
       # we need the git config setup here to make sure the subsequent git commit in each test works
