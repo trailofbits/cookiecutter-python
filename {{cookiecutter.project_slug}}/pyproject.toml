@@ -3,19 +3,21 @@ name = "{{ cookiecutter.project_slug }}"
 dynamic = ["version"]
 description = "{{ cookiecutter.project_description }}"
 readme = "README.md"
-license = { file = "LICENSE" }
+license-files = ["LICENSE"]
+
+{%- if cookiecutter.license == "Apache 2.0" %}
+license = "Apache-2.0"
+{%- elif cookiecutter.license == "AGPL v3" %}
+license = "AGPL-3.0-or-later"
+{%- elif cookiecutter.license == "Proprietary" %}
+license = "LicenseRef-Proprietary-License"
+{%- endif %}
+
 authors = [
     { name = "{{ cookiecutter.author_name }}", email = "{{ cookiecutter.author_email }}" },
 ]
 classifiers = [
     "Programming Language :: Python :: 3",
-    {%- if cookiecutter.license == "Apache 2.0" %}
-    "License :: OSI Approved :: Apache Software License",
-    {%- elif cookiecutter.license == "AGPL v3" %}
-    "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
-    {%- elif cookiecutter.license == "Proprietary" %}
-    "License :: Other/Proprietary License",
-    {%- endif %}
 ]
 dependencies = []
 requires-python = ">=3.9"
