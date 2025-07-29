@@ -23,11 +23,6 @@
         "none"
     ],
     "docstring_coverage": true,
-    "data_library": [
-        "polars",
-        "pandas",
-        "none"
-    ],
     "web_framework": [
         "fastapi",
         "none"

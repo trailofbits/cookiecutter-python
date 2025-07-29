@@ -70,20 +70,6 @@ Tests can also live beside source files as `test_*.py` or `*_test.py`.
 
 ## Key Libraries
 
-{%- if cookiecutter.data_library == "polars" %}
-- **Data processing**: Polars (preferred over pandas)
-  ```python
-  import polars as pl
-  df = pl.DataFrame({"col": [1, 2, 3]})
-  ```
-{%- elif cookiecutter.data_library == "pandas" %}
-- **Data processing**: Pandas
-  ```python
-  import pandas as pd
-  df = pd.DataFrame({"col": [1, 2, 3]})
-  ```
-{%- endif %}
-
 {%- if cookiecutter.web_framework == "fastapi" %}
 - **Web framework**: FastAPI (never use Flask)
   ```python
@@ -100,7 +86,6 @@ Tests can also live beside source files as `test_*.py` or `*_test.py`.
 ## Framework Preferences
 
 - **Web**: Always use FastAPI, never Flask
-- **Data**: Prefer Polars over Pandas for new code
 - **Async**: Use native async/await, not threading
 
 ## Common Patterns
