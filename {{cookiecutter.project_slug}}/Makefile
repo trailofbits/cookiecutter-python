@@ -44,6 +44,7 @@ all:
 
 .PHONY: dev
 dev: $(VENV)/pyvenv.cfg
+	uv run pre-commit install
 
 {%- if cookiecutter.entry_point %}
 .PHONY: run
@@ -59,20 +60,30 @@ $(VENV)/pyvenv.cfg: pyproject.toml
 lint: $(VENV)/pyvenv.cfg
 	uv run ruff format --check && \
 		uv run ruff check && \
-		uv run mypy
+		uv run ty check
 
 	{%- if cookiecutter.docstring_coverage %}
 		uv run interrogate -c pyproject.toml .
 	{%- endif %}
 
-.PHONY: reformat
-reformat:
+.PHONY: format
+format: reformat
+
+.PHONY: check
+check: lint test
+
+.PHONY: typecheck ty
+typecheck ty: $(VENV)/pyvenv.cfg
+	uv run ty check --strict
+
+.PHONY: reformat fix
+reformat fix:
 	uv run ruff format && \
 		uv run ruff check --fix
 
 .PHONY: test tests
 test tests: $(VENV)/pyvenv.cfg
-	uv run pytest --cov=$(PY_IMPORT) $(T) $(TEST_ARGS)
+	uv run pytest -q --cov=$(PY_IMPORT) $(T) $(TEST_ARGS)
 	uv run coverage report -m $(COV_ARGS)
 
 .PHONY: doc

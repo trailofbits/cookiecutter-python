@@ -1,0 +1,45 @@
+# Pre-commit hooks for code quality
+# See https://pre-commit.com for more information
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.2
+    hooks:
+      # Run the formatter
+      - id: ruff-format
+      # Run the linter
+      - id: ruff
+        args: [--fix]
+
+  - repo: local
+    hooks:
+      - id: ty
+        name: ty type check
+        entry: uv run ty check --strict
+        language: system
+        types: [python]
+        pass_filenames: false
+        require_serial: true
+
+      {%- if cookiecutter.docstring_coverage %}
+      - id: interrogate
+        name: interrogate docstring coverage
+        entry: uv run interrogate -c pyproject.toml
+        language: system
+        types: [python]
+        pass_filenames: false
+      {%- endif %}
+
+      - id: pytest
+        name: pytest
+        entry: uv run pytest -q
+        language: system
+        types: [python]
+        pass_filenames: false
+        require_serial: true
+        # Only run on commit, not on push
+        stages: [commit]
+
+# Configuration
+ci:
+  autofix_prs: true
+  autoupdate_schedule: weekly
