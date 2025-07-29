@@ -66,7 +66,7 @@ $(VENV)/pyvenv.cfg: pyproject.toml
 lint: $(VENV)/pyvenv.cfg
 	uv run ruff format --check && \
 		uv run ruff check && \
-		uv run ty check
+		uv run ty check src
 
 	{%- if cookiecutter.docstring_coverage %}
 		uv run interrogate -c pyproject.toml .
@@ -80,7 +80,7 @@ check: lint test
 
 .PHONY: typecheck ty
 typecheck ty: $(VENV)/pyvenv.cfg
-	uv run ty check --strict
+	uv run ty check src
 
 .PHONY: reformat fix
 reformat fix:

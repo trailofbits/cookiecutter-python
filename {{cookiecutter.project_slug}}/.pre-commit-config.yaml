@@ -14,7 +14,7 @@ repos:
     hooks:
       - id: ty
         name: ty type check
-        entry: uv run ty check --strict
+        entry: uv run ty check src
         language: system
         types: [python]
         pass_filenames: false

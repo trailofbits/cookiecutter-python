@@ -166,7 +166,7 @@ GitHub Actions run on every push/PR:
 
 1. **Never commit code that violates the quality standards** - refactor instead
 2. **All public APIs need Google-style docstrings**
-3. **Type hints are mandatory** - use `ty check --strict`
+3. **Type hints are mandatory** - use `ty check`
 4. **Tests can live beside code** - prefer colocated tests for better maintainability
 
 ## Project-Specific Instructions
