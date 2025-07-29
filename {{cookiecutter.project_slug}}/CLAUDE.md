@@ -44,6 +44,9 @@ make test   # Run pytest with coverage
 {% if cookiecutter.entry_point -%}
 make run ARGS="--help"  # Run the CLI
 {%- endif %}
+{%- if cookiecutter.web_framework == "fastapi" %}
+make serve  # Run FastAPI dev server on http://localhost:8000
+{%- endif %}
 make doc    # Build documentation
 ```
 
@@ -80,6 +83,25 @@ Tests can also live beside source files as `test_*.py` or `*_test.py`.
   df = pd.DataFrame({"col": [1, 2, 3]})
   ```
 {%- endif %}
+
+{%- if cookiecutter.web_framework == "fastapi" %}
+- **Web framework**: FastAPI (never use Flask)
+  ```python
+  from fastapi import FastAPI
+  
+  app = FastAPI()
+  
+  @app.get("/")
+  async def root():
+      return {"message": "Hello World"}
+  ```
+{%- endif %}
+
+## Framework Preferences
+
+- **Web**: Always use FastAPI, never Flask
+- **Data**: Prefer Polars over Pandas for new code
+- **Async**: Use native async/await, not threading
 
 ## Common Patterns
 

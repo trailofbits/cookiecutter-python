@@ -25,6 +25,10 @@ dependencies = [
     {%- elif cookiecutter.data_library == "pandas" %}
     "pandas >= 2.0.0",
     {%- endif %}
+    {%- if cookiecutter.web_framework == "fastapi" %}
+    "fastapi >= 0.100.0",
+    "uvicorn[standard] >= 0.23.0",
+    {%- endif %}
 ]
 requires-python = ">=3.11"
 

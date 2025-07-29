@@ -28,6 +28,10 @@
         "pandas",
         "none"
     ],
+    "web_framework": [
+        "fastapi",
+        "none"
+    ],
     "license": [
         "Apache 2.0",
         "AGPL v3",
