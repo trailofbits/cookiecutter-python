@@ -61,7 +61,7 @@ omit = ["{{ cookiecutter.__project_src_path }}/_cli.py"]
 
 [tool.ty]
 # Astral's experimental type checker
-search_path = ["src"]
+src = ["src"]
 
 [tool.ruff]
 line-length = 100
