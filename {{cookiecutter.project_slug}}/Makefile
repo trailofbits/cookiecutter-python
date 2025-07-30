@@ -73,8 +73,8 @@ check: lint test
 typecheck ty: $(VENV)/pyvenv.cfg
 	uv run ty check src
 
-.PHONY: fix format
-fix format:
+.PHONY: fix format reformat
+fix format reformat:
 	uv run ruff format && \
 		uv run ruff check --fix
 
