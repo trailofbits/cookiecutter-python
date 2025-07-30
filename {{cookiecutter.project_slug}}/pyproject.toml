@@ -19,12 +19,7 @@ authors = [
 classifiers = [
     "Programming Language :: Python :: 3",
 ]
-dependencies = [
-    {%- if cookiecutter.web_framework == "fastapi" %}
-    "fastapi >= 0.100.0",
-    "uvicorn[standard] >= 0.23.0",
-    {%- endif %}
-]
+dependencies = []
 requires-python = ">=3.11"
 
 [tool.setuptools.dynamic]
@@ -70,7 +65,51 @@ omit = ["{{ cookiecutter.__project_src_path }}/_cli.py"]
 # Astral's experimental type checker
 search_path = ["src"]
 
-# Ruff configuration is in ruff.toml
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.format]
+line-ending = "lf"
+quote-style = "double"
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "D203",  # Incompatible with D211
+    "D213",  # Incompatible with D212
+    "COM812",  # Can conflict with formatter
+    "ISC001",  # Can conflict with formatter
+]
+
+[tool.ruff.lint.mccabe]
+# Maximum cyclomatic complexity
+max-complexity = 8
+
+[tool.ruff.lint.pydocstyle]
+# Use Google-style docstrings
+convention = "google"
+
+[tool.ruff.lint.pylint]
+# Maximum number of branches for function or method
+max-branches = 12
+# Maximum number of return statements in function or method
+max-returns = 6
+# Maximum number of positional arguments for function or method
+max-positional-args = 5
+
+[tool.ruff.lint.per-file-ignores]
+{% if cookiecutter.entry_point -%}
+"{{ cookiecutter.__project_src_path }}/_cli.py" = [
+    "T201", # allow print in cli module
+]
+{%- endif %}
+"test/**/*.py" = [
+    "D",    # no docstrings in tests
+    "S101", # asserts are expected in tests
+    "PLR2004",  # Allow magic values in tests
+]
+"**/conftest.py" = ["D"]  # No docstrings in pytest config
 
 {%- if cookiecutter.docstring_coverage %}
 [tool.interrogate]

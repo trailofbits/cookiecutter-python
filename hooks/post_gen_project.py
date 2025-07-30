@@ -6,8 +6,6 @@ REMOVE_PATHS = [
     "{% if cookiecutter.entry_point == '' %} {{ cookiecutter.__project_src_path }}/__main__.py {% endif %}",
     # We delete the docs GH workflow if the project has no documentation
     "{% if cookiecutter.documentation == 'none' %} .github/workflows/docs.yml {% endif %}",
-    # We delete _app.py if we're not generating a FastAPI app
-    "{% if cookiecutter.web_framework != 'fastapi' %} {{ cookiecutter.__project_src_path }}/_app.py {% endif %}",
 ]
 
 for path in REMOVE_PATHS:

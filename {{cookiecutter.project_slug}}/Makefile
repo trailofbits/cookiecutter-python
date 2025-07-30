@@ -52,12 +52,6 @@ run: $(VENV)/pyvenv.cfg
 	uv run {{ cookiecutter.entry_point }} $(ARGS)
 {%- endif %}
 
-{%- if cookiecutter.web_framework == "fastapi" %}
-.PHONY: serve
-serve: $(VENV)/pyvenv.cfg
-	uv run uvicorn {{ cookiecutter.__project_import }}._app:app --reload --host 0.0.0.0 --port 8000
-{%- endif %}
-
 $(VENV)/pyvenv.cfg: pyproject.toml
 	uv venv $(VENV)
 	uv pip install -e '.[$(INSTALL_EXTRA)]'
@@ -72,9 +66,6 @@ lint: $(VENV)/pyvenv.cfg
 		uv run interrogate -c pyproject.toml .
 	{%- endif %}
 
-.PHONY: format
-format: reformat
-
 .PHONY: check
 check: lint test
 
@@ -82,8 +73,8 @@ check: lint test
 typecheck ty: $(VENV)/pyvenv.cfg
 	uv run ty check src
 
-.PHONY: reformat fix
-reformat fix:
+.PHONY: fix format
+fix format:
 	uv run ruff format && \
 		uv run ruff check --fix
 
