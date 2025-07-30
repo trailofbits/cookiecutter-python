@@ -36,8 +36,8 @@ repos:
         types: [python]
         pass_filenames: false
         require_serial: true
-        # Only run on commit, not on push
-        stages: [commit]
+        # Only run on pre-commit, not on push
+        stages: [pre-commit]
 
 # Configuration
 ci:

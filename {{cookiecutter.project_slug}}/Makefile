@@ -73,10 +73,14 @@ check: lint test
 typecheck: $(VENV)/pyvenv.cfg
 	uv run pyright
 
-.PHONY: fix format reformat
-fix format reformat:
+.PHONY: fix
+fix:
 	uv run ruff format && \
 		uv run ruff check --fix
+
+# Alias for backwards compatibility
+.PHONY: reformat
+reformat: fix
 
 .PHONY: test tests
 test tests: $(VENV)/pyvenv.cfg

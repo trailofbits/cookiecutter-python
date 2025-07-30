@@ -123,6 +123,25 @@ parser.add_argument(
 - Mock external dependencies
 - Test both success and error paths
 
+### Test Markers
+
+Mark slow tests to exclude them from pre-commit hooks:
+
+```python
+import pytest
+
+@pytest.mark.slow
+def test_integration_with_external_api():
+    """This test won't run during pre-commit hooks."""
+    ...
+
+def test_fast_unit_test():
+    """This test will run during pre-commit hooks."""
+    ...
+```
+
+The pre-commit hook runs `pytest -k "not slow"` to skip slow tests.
+
 ## CI/CD
 
 GitHub Actions run on every push/PR:
