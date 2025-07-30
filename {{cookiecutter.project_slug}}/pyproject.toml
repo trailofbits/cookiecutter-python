@@ -59,9 +59,7 @@ Source = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.
 # don't attempt code coverage for the CLI entrypoints
 omit = ["{{ cookiecutter.__project_src_path }}/_cli.py"]
 
-[tool.ty]
-# Astral's experimental type checker
-src = ["src"]
+# ty configuration - using defaults for now as ty is in early alpha
 
 [tool.ruff]
 line-length = 100
