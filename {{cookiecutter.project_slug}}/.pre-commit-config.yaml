@@ -12,9 +12,9 @@ repos:
 
   - repo: local
     hooks:
-      - id: ty
-        name: ty type check
-        entry: uv run ty check src
+      - id: pyright
+        name: pyright type check
+        entry: uv run pyright
         language: system
         types: [python]
         pass_filenames: false
@@ -30,8 +30,8 @@ repos:
       {%- endif %}
 
       - id: pytest
-        name: pytest
-        entry: uv run pytest -q
+        name: pytest (fast tests only)
+        entry: uv run pytest -x --tb=short -k "not slow"
         language: system
         types: [python]
         pass_filenames: false

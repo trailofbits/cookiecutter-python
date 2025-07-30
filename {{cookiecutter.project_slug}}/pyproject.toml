@@ -34,7 +34,7 @@ lint = [
     # NOTE: ruff is under active development, so we pin conservatively here
     # and let Dependabot periodically perform this update.
     "ruff ~= 0.6.2",
-    "ty >= 0.0.1a16",
+    "pyright >= 1.1",
     "types-html5lib",
     "types-requests",
     "types-toml",
@@ -59,7 +59,12 @@ Source = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.
 # don't attempt code coverage for the CLI entrypoints
 omit = ["{{ cookiecutter.__project_src_path }}/_cli.py"]
 
-# ty configuration - using defaults for now as ty is in early alpha
+[tool.pyright]
+# Type checking configuration
+pythonVersion = "3.11"
+typeCheckingMode = "standard"
+useLibraryCodeForTypes = true
+reportMissingTypeStubs = false
 
 [tool.ruff]
 line-length = 100
@@ -121,4 +126,4 @@ fail-under = 100
 testpaths = ["src", "test"]
 python_files = ["test_*.py", "*_test.py"]
 # Show test durations
-addopts = "-q --durations=10"
+addopts = "--durations=10"

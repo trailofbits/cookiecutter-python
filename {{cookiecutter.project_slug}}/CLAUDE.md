@@ -33,9 +33,9 @@ make dev
 make check  # Runs lint + tests
 
 # Code quality
-make lint   # ruff format --check + ruff check + ty check
+make lint   # ruff format --check + ruff check + pyright
 make fix    # Auto-fix formatting and lint issues
-make ty     # Run type checker
+make typecheck  # Run pyright type checker
 
 # Testing
 make test   # Run pytest with coverage
@@ -65,11 +65,14 @@ test/
 
 Tests can also live beside source files as `test_*.py` or `*_test.py`.
 
-## Framework Preferences
+## General Python Guidelines
 
-- **Web**: Always use FastAPI, never Flask
-- **Data**: Prefer Polars over Pandas for new code
-- **Async**: Use native async/await, not threading
+These are general preferences for Python development:
+
+- **Web frameworks**: Prefer FastAPI over Flask for new projects
+- **Data processing**: Consider Polars for performance-critical data operations
+- **Async programming**: Use native async/await instead of threading
+- **Type checking**: Always use type hints and run pyright
 
 ## Common Patterns
 
@@ -123,7 +126,7 @@ parser.add_argument(
 ## CI/CD
 
 GitHub Actions run on every push/PR:
-1. **Linting**: ruff format/check + ty type checking
+1. **Linting**: ruff format/check + pyright type checking
 2. **Tests**: pytest with coverage
 3. **Security**: zizmor workflow scanning
 {%- if cookiecutter.documentation == "pdoc" %}
@@ -134,7 +137,7 @@ GitHub Actions run on every push/PR:
 
 1. **Never commit code that violates the quality standards** - refactor instead
 2. **All public APIs need Google-style docstrings**
-3. **Type hints are mandatory** - use `ty check`
+3. **Type hints are mandatory** - use `pyright`
 4. **Tests can live beside code** - prefer colocated tests for better maintainability
 
 ## Project-Specific Instructions
