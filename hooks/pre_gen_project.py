@@ -6,7 +6,9 @@ NAMESPACE_REGEX = r"^[a-z][_a-z0-9]*(\.[a-z][_a-z0-9]*)*$"
 namespace_import = "{{ cookiecutter.project_namespace_import }}"
 if namespace_import and not re.match(NAMESPACE_REGEX, namespace_import):
     print(f"ERROR: '{namespace_import}' is not a valid Python namespace import path!")
-    print(f"       It must follow regex '{NAMESPACE_REGEX}', i.e. 'one_two' or 'one_two.three'")
+    print(
+        f"       It must follow regex '{NAMESPACE_REGEX}', i.e. 'one_two' or 'one_two.three'"
+    )
     sys.exit(1)
 
 
