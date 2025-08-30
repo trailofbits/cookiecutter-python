@@ -35,7 +35,6 @@ jobs:
 
           cd /tmp/python-project
           git init . && git add . && git commit -m "Initial commit"
-          make dev
           make reformat
 
           git diff --exit-code || { >&2 echo "please reformat"; exit 1; }
@@ -54,7 +53,6 @@ jobs:
 
           cd /tmp/python-project
           git init . && git add . && git commit -m "Initial commit"
-          make dev
           make reformat
 
           git diff --exit-code || { >&2 echo "please reformat"; exit 1; }
@@ -73,7 +71,6 @@ jobs:
 
           cd /tmp/tob-r-and-e-python-project
           git init . && git add . && git commit -m "Initial commit"
-          make dev
           make reformat
 
           git diff --exit-code || { >&2 echo "please reformat"; exit 1; }
@@ -92,7 +89,6 @@ jobs:
 
           cd /tmp/bit-trails
           git init . && git add . && git commit -m "Initial commit"
-          make dev
           make reformat
 
           git diff --exit-code || { >&2 echo "please reformat"; exit 1; }
@@ -112,7 +108,6 @@ jobs:
 
           cd /tmp/python-project
           git init . && git add . && git commit -m "Initial commit"
-          make dev
           make reformat
 
           git diff --exit-code || { >&2 echo "please reformat"; exit 1; }

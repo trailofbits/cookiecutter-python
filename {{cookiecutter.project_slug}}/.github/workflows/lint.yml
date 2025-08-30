@@ -20,4 +20,4 @@ jobs:
         uses: astral-sh/setup-uv@445689ea25e0de0a23313031f5fe577c74ae45a1 # v6.3.0
 
       - name: lint
-        run: make lint INSTALL_EXTRA=lint
+        run: make lint

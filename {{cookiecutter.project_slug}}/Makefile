@@ -2,26 +2,8 @@ SHELL := /bin/bash
 
 PY_IMPORT = {{ cookiecutter.__project_import }}
 
-# Optionally overriden by the user, if they're using a virtual environment manager.
-# Warning: changing this name to something else than '.venv' will make working with
-# uv harder.
-VENV ?= .venv
-
-# On Windows, venv scripts/shims are under `Scripts` instead of `bin`.
-VENV_BIN := $(VENV)/bin
-ifeq ($(OS),Windows_NT)
-	VENV_BIN := $(VENV)/Scripts
-endif
-
-# Optionally overridden by the user in the `release` target.
-BUMP_ARGS :=
-
 # Optionally overridden by the user in the `test` target.
 TESTS :=
-
-# Optionally overridden by the user/CI, to limit the installation to a specific
-# subset of development dependencies.
-INSTALL_EXTRA := dev
 
 # If the user selects a specific test pattern to run, set `pytest` to fail fast
 # and only run tests that match the pattern.
@@ -39,21 +21,14 @@ endif
 all:
 	@echo "Run my targets individually!"
 
-.PHONY: dev
-dev: $(VENV)/pyvenv.cfg
-
 {%- if cookiecutter.entry_point %}
 .PHONY: run
-run: $(VENV)/pyvenv.cfg
+run:
 	uv run {{ cookiecutter.entry_point }} $(ARGS)
 {%- endif %}
 
-$(VENV)/pyvenv.cfg: pyproject.toml
-	uv venv $(VENV)
-	uv sync --group '$(INSTALL_EXTRA)'
-
 .PHONY: lint
-lint: $(VENV)/pyvenv.cfg
+lint:
 	uv run ruff format --check && \
 		uv run ruff check && \
 		uv run mypy
@@ -67,14 +42,14 @@ reformat:
 	uv run ruff format && \
 		uv run ruff check --fix
 
-.PHONY: test tests
-test tests: $(VENV)/pyvenv.cfg
+.PHONY: test
+test:
 	uv run pytest --cov=$(PY_IMPORT) $(T) $(TEST_ARGS)
 	uv run coverage report -m $(COV_ARGS)
 
 .PHONY: doc
 {%- if cookiecutter.documentation == 'pdoc' %}
-doc: $(VENV)/pyvenv.cfg
+doc:
 	uv run pdoc -o html $(PY_IMPORT)
 {%- elif cookiecutter.documentation == 'none' %}
 doc:
@@ -82,5 +57,5 @@ doc:
 {%- endif %}
 
 .PHONY: package
-package: $(VENV)/pyvenv.cfg
+package:
 	uv build

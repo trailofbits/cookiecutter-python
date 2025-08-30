@@ -29,4 +29,4 @@ jobs:
           python-version: ${{ matrix.python }}
 
       - name: test
-        run: make test INSTALL_EXTRA=test
+        run: make test
