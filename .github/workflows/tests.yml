@@ -35,9 +35,9 @@ jobs:
 
           cd /tmp/python-project
           git init . && git add . && git commit -m "Initial commit"
-          make reformat
+          make format
 
-          git diff --exit-code || { >&2 echo "please reformat"; exit 1; }
+          git diff --exit-code || { >&2 echo "please format"; exit 1; }
 
           make lint
           make test
@@ -53,9 +53,9 @@ jobs:
 
           cd /tmp/python-project
           git init . && git add . && git commit -m "Initial commit"
-          make reformat
+          make format
 
-          git diff --exit-code || { >&2 echo "please reformat"; exit 1; }
+          git diff --exit-code || { >&2 echo "please format"; exit 1; }
 
           make lint
           make test
@@ -71,9 +71,9 @@ jobs:
 
           cd /tmp/tob-r-and-e-python-project
           git init . && git add . && git commit -m "Initial commit"
-          make reformat
+          make format
 
-          git diff --exit-code || { >&2 echo "please reformat"; exit 1; }
+          git diff --exit-code || { >&2 echo "please format"; exit 1; }
 
           make lint
           make test
@@ -89,9 +89,9 @@ jobs:
 
           cd /tmp/bit-trails
           git init . && git add . && git commit -m "Initial commit"
-          make reformat
+          make format
 
-          git diff --exit-code || { >&2 echo "please reformat"; exit 1; }
+          git diff --exit-code || { >&2 echo "please format"; exit 1; }
 
           make lint
           make test
@@ -108,9 +108,9 @@ jobs:
 
           cd /tmp/python-project
           git init . && git add . && git commit -m "Initial commit"
-          make reformat
+          make format
 
-          git diff --exit-code || { >&2 echo "please reformat"; exit 1; }
+          git diff --exit-code || { >&2 echo "please format"; exit 1; }
 
           make lint
           make test

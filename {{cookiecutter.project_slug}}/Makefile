@@ -37,8 +37,8 @@ lint:
 		uv run interrogate -c pyproject.toml .
 	{%- endif %}
 
-.PHONY: reformat
-reformat:
+.PHONY: format
+format:
 	uv run ruff format && \
 		uv run ruff check --fix
 
