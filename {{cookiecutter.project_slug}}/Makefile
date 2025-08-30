@@ -2,9 +2,6 @@ SHELL := /bin/bash
 
 PY_IMPORT = {{ cookiecutter.__project_import }}
 
-ALL_PY_SRCS := $(shell find src -name '*.py') \
-	$(shell find test -name '*.py')
-
 # Optionally overriden by the user, if they're using a virtual environment manager.
 # Warning: changing this name to something else than '.venv' will make working with
 # uv harder.
@@ -87,7 +84,3 @@ doc:
 .PHONY: package
 package: $(VENV)/pyvenv.cfg
 	uv build
-
-.PHONY: edit
-edit:
-	$(EDITOR) $(ALL_PY_SRCS)
