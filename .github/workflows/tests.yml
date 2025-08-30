@@ -41,7 +41,7 @@ jobs:
 
           make lint
           make test
-          make package
+          make build
           make doc
           cd .. && rm -rf /tmp/python-project
 
@@ -59,7 +59,7 @@ jobs:
 
           make lint
           make test
-          make package
+          make build
           make doc
           cd .. && rm -rf /tmp/python-project
 
@@ -77,7 +77,7 @@ jobs:
 
           make lint
           make test
-          make package
+          make build
           make doc
           cd .. && rm -rf /tmp/tob-r-and-e-python-project
 
@@ -95,7 +95,7 @@ jobs:
 
           make lint
           make test
-          make package
+          make build
           make doc
           cd .. && rm -rf /tmp/bit-trails
 
@@ -114,6 +114,6 @@ jobs:
 
           make lint
           make test
-          make package
+          make build
           make doc
           cd .. && rm -rf /tmp/python-project

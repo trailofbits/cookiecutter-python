@@ -56,6 +56,6 @@ doc:
 	@echo "No documentation set up"
 {%- endif %}
 
-.PHONY: package
-package:
+.PHONY: build
+build:
 	uv build
