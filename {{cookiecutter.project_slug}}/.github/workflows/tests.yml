@@ -25,9 +25,8 @@ jobs:
 
       - name: Install uv
         uses: astral-sh/setup-uv@445689ea25e0de0a23313031f5fe577c74ae45a1 # v6.3.0
-
-      - name: Install Python ${{ matrix.python }}
-        run: uv python install ${{ matrix.python }}
+        with:
+          python-version: ${{ matrix.python }}
 
       - name: test
         run: make test INSTALL_EXTRA=test
