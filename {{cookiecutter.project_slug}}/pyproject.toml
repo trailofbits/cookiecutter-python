@@ -49,9 +49,6 @@ dev = [
     {include-group = "doc"},
     {include-group = "test"},
     {include-group = "lint"},
-    "twine",
-    "build",
-    "{{ cookiecutter.project_slug }}",
 ]
 
 {% if cookiecutter.entry_point -%}
