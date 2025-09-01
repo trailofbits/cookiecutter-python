@@ -1,6 +1,6 @@
 [project]
 name = "{{ cookiecutter.project_slug }}"
-dynamic = ["version"]
+version = "{{ cookiecutter.version }}"
 description = "{{ cookiecutter.project_description }}"
 readme = "README.md"
 license-files = ["LICENSE"]
@@ -23,20 +23,8 @@ dependencies = []
 requires-python = ">=3.9"
 
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
-[tool.hatch.version]
-path = "{{ cookiecutter.__project_src_path }}/__init__.py"
-
-[tool.hatch.build.targets.wheel]
-packages = ["{{ cookiecutter.__project_src_first }}"]
-
-[tool.hatch.build.targets.sdist]
-exclude = ["/.github"]
-
-[tool.setuptools.dynamic]
-version = { attr = "{{ cookiecutter.__project_import }}.__version__" }
+requires = ["uv_build>=0.8.14,<0.9.0"]
+build-backend = "uv_build"
 
 [dependency-groups]
 doc = [
@@ -133,3 +121,8 @@ fail-under = 100
 
 [tool.uv.sources]
 {{ cookiecutter.project_slug }} = { workspace = true }
+
+{%- if cookiecutter.project_namespace_import %}
+[tool.uv.build-backend]
+module-name = "{{ cookiecutter.__project_import }}"
+{%- endif %}
