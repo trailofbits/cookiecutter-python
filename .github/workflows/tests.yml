@@ -35,14 +35,13 @@ jobs:
 
           cd /tmp/python-project
           git init . && git add . && git commit -m "Initial commit"
-          make dev
-          make reformat
+          make format
 
-          git diff --exit-code || { >&2 echo "please reformat"; exit 1; }
+          git diff --exit-code || { >&2 echo "please format"; exit 1; }
 
           make lint
           make test
-          make package
+          make build
           make doc
           cd .. && rm -rf /tmp/python-project
 
@@ -54,14 +53,13 @@ jobs:
 
           cd /tmp/python-project
           git init . && git add . && git commit -m "Initial commit"
-          make dev
-          make reformat
+          make format
 
-          git diff --exit-code || { >&2 echo "please reformat"; exit 1; }
+          git diff --exit-code || { >&2 echo "please format"; exit 1; }
 
           make lint
           make test
-          make package
+          make build
           make doc
           cd .. && rm -rf /tmp/python-project
 
@@ -73,14 +71,13 @@ jobs:
 
           cd /tmp/tob-r-and-e-python-project
           git init . && git add . && git commit -m "Initial commit"
-          make dev
-          make reformat
+          make format
 
-          git diff --exit-code || { >&2 echo "please reformat"; exit 1; }
+          git diff --exit-code || { >&2 echo "please format"; exit 1; }
 
           make lint
           make test
-          make package
+          make build
           make doc
           cd .. && rm -rf /tmp/tob-r-and-e-python-project
 
@@ -92,14 +89,13 @@ jobs:
 
           cd /tmp/bit-trails
           git init . && git add . && git commit -m "Initial commit"
-          make dev
-          make reformat
+          make format
 
-          git diff --exit-code || { >&2 echo "please reformat"; exit 1; }
+          git diff --exit-code || { >&2 echo "please format"; exit 1; }
 
           make lint
           make test
-          make package
+          make build
           make doc
           cd .. && rm -rf /tmp/bit-trails
 
@@ -112,13 +108,12 @@ jobs:
 
           cd /tmp/python-project
           git init . && git add . && git commit -m "Initial commit"
-          make dev
-          make reformat
+          make format
 
-          git diff --exit-code || { >&2 echo "please reformat"; exit 1; }
+          git diff --exit-code || { >&2 echo "please format"; exit 1; }
 
           make lint
           make test
-          make package
+          make build
           make doc
           cd .. && rm -rf /tmp/python-project
