@@ -20,7 +20,7 @@ jobs:
       uses: astral-sh/setup-uv@557e51de59eb14aaaba2ed9621916900a91d50c6 # v6.6.1
 
     - name: Build distributions
-      run: uv build
+      run: make build
 
     - name: Upload distributions
       uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
