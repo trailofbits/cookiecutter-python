@@ -44,7 +44,7 @@ format:
 
 .PHONY: test
 test:
-	uv run pytest --cov=$(PY_IMPORT) $(T) $(TEST_ARGS)
+	uv run pytest -svv --timeout=300 --cov=$(PY_IMPORT) $(T) $(TEST_ARGS)
 	uv run coverage report -m $(COV_ARGS)
 
 .PHONY: doc
