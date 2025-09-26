@@ -5,7 +5,8 @@ on:
 
 name: release
 
-permissions: {}
+permissions:
+  contents: read # needed for checkout in private repos
 
 jobs:
   build:

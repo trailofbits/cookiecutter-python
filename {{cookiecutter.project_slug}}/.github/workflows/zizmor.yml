@@ -6,7 +6,8 @@ on:
   pull_request:
     branches: ["**"]
 
-permissions: {}
+permissions:
+  contents: read # needed for checkout in private repos
 
 jobs:
   zizmor:
