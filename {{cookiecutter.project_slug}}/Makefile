@@ -29,9 +29,10 @@ run:
 
 .PHONY: lint
 lint:
+	uv sync --group lint
 	uv run ruff format --check && \
 		uv run ruff check && \
-		uv run mypy
+		uv run pyright
 
 	{%- if cookiecutter.docstring_coverage %}
 		uv run interrogate -c pyproject.toml .
@@ -39,11 +40,13 @@ lint:
 
 .PHONY: format
 format:
+	uv sync --group lint
 	uv run ruff format && \
 		uv run ruff check --fix
 
 .PHONY: test
 test:
+	uv sync --group test
 	uv run pytest -svv --timeout=300 --cov=$(PY_IMPORT) $(T) $(TEST_ARGS)
 	uv run coverage report -m $(COV_ARGS)
 

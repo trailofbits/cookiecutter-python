@@ -37,7 +37,7 @@ lint = [
     # NOTE: ruff is under active development, so we pin conservatively here
     # and let Dependabot periodically perform this update.
     "ruff ~= 0.12",
-    "mypy >= 1.0",
+    "pyright ~= 1.1.407",
     "types-html5lib",
     "types-requests",
     "types-toml",
@@ -66,24 +66,13 @@ Source = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.
 # don't attempt code coverage for the CLI entrypoints
 omit = ["{{ cookiecutter.__project_src_path }}/_cli.py"]
 
-[tool.mypy]
-mypy_path = "src"
-packages = "{{ cookiecutter.__project_import }}"
-allow_redefinition = true
-check_untyped_defs = true
-disallow_incomplete_defs = true
-disallow_untyped_defs = true
-ignore_missing_imports = true
-no_implicit_optional = true
-show_error_codes = true
-sqlite_cache = true
-strict_equality = true
-warn_no_return = true
-warn_redundant_casts = true
-warn_return_any = true
-warn_unreachable = true
-warn_unused_configs = true
-warn_unused_ignores = true
+[tool.pyright]
+include = ["src", "test"]
+exclude = []
+reportUnusedImport = "warning"
+reportUnusedVariable = "warning"
+reportGeneralTypeIssues = "error"
+typeCheckingMode = "strict"
 
 [tool.ruff]
 line-length = 100
