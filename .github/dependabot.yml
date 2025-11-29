@@ -10,17 +10,6 @@ updates:
       default-days: 7
     directories:
         - "/"
-    groups:
-      actions:
-        patterns:
-          - "*"
-    schedule:
-      interval: daily
-
-  - package-ecosystem: github-actions
-    cooldown:
-      default-days: 7
-    directories:
         - "{{cookiecutter.project_slug}}/.github/workflows"
     groups:
       actions:
