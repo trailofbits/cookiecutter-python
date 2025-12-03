@@ -9,8 +9,8 @@ updates:
     cooldown:
       default-days: 7
     directories:
-        - "/"
-        - "{{cookiecutter.project_slug}}/.github/workflows"
+      - "/"
+      - "{{cookiecutter.project_slug}}/.github/workflows"
     groups:
       actions:
         patterns:
