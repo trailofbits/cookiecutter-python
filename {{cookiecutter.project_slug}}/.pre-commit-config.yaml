@@ -2,13 +2,14 @@
 # See https://pre-commit.com for more information
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.6.2
+    # Ruff version.
+    rev: v0.14.8
     hooks:
-      # Run the formatter
-      - id: ruff-format
-      # Run the linter
-      - id: ruff
+      # Run the linter.
+      - id: ruff-check
         args: [--fix]
+      # Run the formatter.
+      - id: ruff-format
 
   - repo: local
     hooks:
@@ -30,8 +31,8 @@ repos:
       {%- endif %}
 
       - id: pytest
-        name: pytest (fast tests only)
-        entry: uv run pytest -x --tb=short -k "not slow"
+        name: pytest
+        entry: uv run pytest
         language: system
         types: [python]
         pass_filenames: false

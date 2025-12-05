@@ -60,11 +60,8 @@ $(VENV)/pyvenv.cfg: pyproject.toml
 lint: $(VENV)/pyvenv.cfg
 	uv run ruff format --check && \
 		uv run ruff check && \
-		uv run pyright
-
-	{%- if cookiecutter.docstring_coverage %}
-		uv run interrogate -c pyproject.toml .
-	{%- endif %}
+		uv run pyright{% if cookiecutter.docstring_coverage %} && \
+		uv run interrogate -c pyproject.toml .{% endif %}
 
 .PHONY: check
 check: lint test
