@@ -15,7 +15,7 @@ This is a Python library package.
 ## Stack
 
 - Package manager: uv
-- Build backend: hatchling
+- Build backend: uv_build
 - Linting/formatting: ruff
 - Type checking: pyright
 - Testing: pytest
