@@ -63,21 +63,10 @@ lint: $(VENV)/pyvenv.cfg
 		uv run pyright{% if cookiecutter.docstring_coverage %} && \
 		uv run interrogate -c pyproject.toml .{% endif %}
 
-.PHONY: check
-check: lint test
-
-.PHONY: typecheck
-typecheck: $(VENV)/pyvenv.cfg
-	uv run pyright
-
-.PHONY: fix
-fix:
+.PHONY: reformat
+reformat:
 	uv run ruff format && \
 		uv run ruff check --fix
-
-# Alias for backwards compatibility
-.PHONY: reformat
-reformat: fix
 
 .PHONY: test tests
 test tests: $(VENV)/pyvenv.cfg
