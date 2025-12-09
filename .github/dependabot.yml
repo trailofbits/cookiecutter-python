@@ -6,13 +6,14 @@ updates:
 
   # Update GitHub Actions of both the template and the repo
   - package-ecosystem: github-actions
+    cooldown:
+      default-days: 7
     directories:
-        - "/"
-    schedule:
-      interval: daily
-
-  - package-ecosystem: github-actions
-    directories:
-        - "{{cookiecutter.project_slug}}/.github/workflows"
+      - "/"
+      - "{{cookiecutter.project_slug}}/.github/workflows"
+    groups:
+      actions:
+        patterns:
+          - "*"
     schedule:
       interval: daily

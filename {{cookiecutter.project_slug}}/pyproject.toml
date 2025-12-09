@@ -1,6 +1,6 @@
 [project]
 name = "{{ cookiecutter.project_slug }}"
-dynamic = ["version"]
+version = "{{ cookiecutter.version }}"
 description = "{{ cookiecutter.project_description }}"
 readme = "README.md"
 license-files = ["LICENSE"]
@@ -21,21 +21,22 @@ classifiers = [
 dependencies = []
 requires-python = ">=3.10"
 
-[tool.setuptools.dynamic]
-version = { attr = "{{ cookiecutter.__project_import }}.__version__" }
+[build-system]
+requires = ["uv_build>=0.8.14,<0.9.0"]
+build-backend = "uv_build"
 
-[project.optional-dependencies]
+[dependency-groups]
 doc = [
     {%- if cookiecutter.documentation == "pdoc" -%}
     "pdoc"
     {%- endif -%}
 ]
-test = ["pytest", "pytest-cov", "pretend", "coverage[toml]"]
+test = ["pytest", "pytest-cov", "pytest-timeout", "pretend", "coverage[toml]"]
 lint = [
     # NOTE: ruff is under active development, so we pin conservatively here
     # and let Dependabot periodically perform this update.
-    "ruff ~= 0.14.8",
-    "pyright >= 1.1",
+    "ruff ~= 0.14.0",
+    "pyright ~= 1.1.407",
     "types-html5lib",
     "types-requests",
     "types-toml",
@@ -43,7 +44,11 @@ lint = [
     "interrogate",
     {%- endif %}
 ]
-dev = ["{{ cookiecutter.project_slug }}[doc,test,lint]", "twine", "build", "pre-commit"]
+dev = [
+    {include-group = "doc"},
+    {include-group = "test"},
+    {include-group = "lint"},
+]
 
 {% if cookiecutter.entry_point -%}
 [project.scripts]
@@ -61,11 +66,12 @@ Source = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.
 omit = ["{{ cookiecutter.__project_src_path }}/_cli.py"]
 
 [tool.pyright]
-# Type checking configuration
 include = ["src", "test"]
 pythonVersion = "3.10"
 typeCheckingMode = "strict"
-useLibraryCodeForTypes = true
+reportUnusedImport = "warning"
+reportUnusedVariable = "warning"
+reportGeneralTypeIssues = "error"
 reportMissingTypeStubs = false
 
 [tool.ruff]
@@ -126,5 +132,12 @@ fail-under = 100
 [tool.pytest.ini_options]
 testpaths = ["test"]
 python_files = ["test_*.py"]
-# Show test durations
 addopts = "--durations=10"
+
+[tool.uv.sources]
+{{ cookiecutter.project_slug }} = { workspace = true }
+
+{%- if cookiecutter.project_namespace_import %}
+[tool.uv.build-backend]
+module-name = "{{ cookiecutter.__project_import }}"
+{%- endif %}

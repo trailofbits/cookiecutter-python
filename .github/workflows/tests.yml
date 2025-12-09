@@ -12,12 +12,12 @@ jobs:
   self-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
         with:
           persist-credentials: false
 
       - name: Install uv
-        uses: astral-sh/setup-uv@e92bafb6253dcd438e0484186d7669ea7a8ca1cc # v6.4.3
+        uses: astral-sh/setup-uv@1e862dfacbd1d6d858c55d9b792c756523627244 # v7.1.4
         with:
           cache-dependency-glob: cookiecutter.json
 
@@ -35,14 +35,13 @@ jobs:
 
           cd /tmp/python-project
           git init . && git add . && git commit -m "Initial commit"
-          make dev
-          make reformat
+          make format
 
-          git diff --exit-code || { >&2 echo "please reformat"; exit 1; }
+          git diff --exit-code || { >&2 echo "please format"; exit 1; }
 
           make lint
           make test
-          make package
+          make build
           make doc
           cd .. && rm -rf /tmp/python-project
 
@@ -54,14 +53,13 @@ jobs:
 
           cd /tmp/python-project
           git init . && git add . && git commit -m "Initial commit"
-          make dev
-          make reformat
+          make format
 
-          git diff --exit-code || { >&2 echo "please reformat"; exit 1; }
+          git diff --exit-code || { >&2 echo "please format"; exit 1; }
 
           make lint
           make test
-          make package
+          make build
           make doc
           cd .. && rm -rf /tmp/python-project
 
@@ -73,14 +71,13 @@ jobs:
 
           cd /tmp/tob-r-and-e-python-project
           git init . && git add . && git commit -m "Initial commit"
-          make dev
-          make reformat
+          make format
 
-          git diff --exit-code || { >&2 echo "please reformat"; exit 1; }
+          git diff --exit-code || { >&2 echo "please format"; exit 1; }
 
           make lint
           make test
-          make package
+          make build
           make doc
           cd .. && rm -rf /tmp/tob-r-and-e-python-project
 
@@ -92,14 +89,13 @@ jobs:
 
           cd /tmp/bit-trails
           git init . && git add . && git commit -m "Initial commit"
-          make dev
-          make reformat
+          make format
 
-          git diff --exit-code || { >&2 echo "please reformat"; exit 1; }
+          git diff --exit-code || { >&2 echo "please format"; exit 1; }
 
           make lint
           make test
-          make package
+          make build
           make doc
           cd .. && rm -rf /tmp/bit-trails
 
@@ -112,13 +108,12 @@ jobs:
 
           cd /tmp/python-project
           git init . && git add . && git commit -m "Initial commit"
-          make dev
-          make reformat
+          make format
 
-          git diff --exit-code || { >&2 echo "please reformat"; exit 1; }
+          git diff --exit-code || { >&2 echo "please format"; exit 1; }
 
           make lint
           make test
-          make package
+          make build
           make doc
           cd .. && rm -rf /tmp/python-project
