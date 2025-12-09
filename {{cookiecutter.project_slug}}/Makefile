@@ -21,6 +21,11 @@ endif
 all:
 	@echo "Run my targets individually!"
 
+.PHONY: dev
+dev:
+	uv sync --group dev
+	uv run pre-commit install
+
 {%- if cookiecutter.entry_point %}
 .PHONY: run
 run:
