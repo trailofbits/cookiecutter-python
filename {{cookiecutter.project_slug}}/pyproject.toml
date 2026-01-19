@@ -45,7 +45,7 @@ dev = [
     {include-group = "doc"},
     {include-group = "test"},
     {include-group = "lint"},
-    "pre-commit",
+    "prek",
 ]
 
 {% if cookiecutter.entry_point -%}

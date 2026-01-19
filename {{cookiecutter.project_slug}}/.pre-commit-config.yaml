@@ -1,6 +1,15 @@
 # Pre-commit hooks for code quality
-# See https://pre-commit.com for more information
+# Uses prek (https://github.com/j178/prek) - a faster pre-commit alternative
 repos:
+  - repo: builtin
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-toml
+      - id: check-merge-conflict
+      - id: detect-private-key
+
   - repo: local
     hooks:
       - id: format
@@ -27,6 +36,5 @@ repos:
         require_serial: true
         stages: [pre-commit]
 
-# Configuration
 ci:
   autofix_prs: true

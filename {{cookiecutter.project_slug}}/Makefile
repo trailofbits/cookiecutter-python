@@ -24,7 +24,7 @@ all:
 .PHONY: dev
 dev:
 	uv sync --group dev
-	uv run pre-commit install
+	uv run prek install
 
 {%- if cookiecutter.entry_point %}
 .PHONY: run
