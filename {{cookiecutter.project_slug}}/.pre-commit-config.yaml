@@ -1,0 +1,37 @@
+# Pre-commit hooks for code quality
+# Uses prek (https://github.com/j178/prek) - a faster pre-commit alternative
+repos:
+  - repo: builtin
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-toml
+      - id: check-merge-conflict
+      - id: detect-private-key
+
+  - repo: local
+    hooks:
+      - id: format
+        name: format code
+        entry: make format
+        language: system
+        types: [python]
+        pass_filenames: false
+
+      - id: lint
+        name: lint code
+        entry: make lint
+        language: system
+        types: [python]
+        pass_filenames: false
+        require_serial: true
+
+      - id: test
+        name: run tests
+        entry: make test
+        language: system
+        types: [python]
+        pass_filenames: false
+        require_serial: true
+        stages: [pre-push]

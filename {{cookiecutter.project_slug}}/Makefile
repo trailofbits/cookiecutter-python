@@ -21,6 +21,11 @@ endif
 all:
 	@echo "Run my targets individually!"
 
+.PHONY: dev
+dev:
+	uv sync --group dev
+	uv run prek install
+
 {%- if cookiecutter.entry_point %}
 .PHONY: run
 run:
@@ -32,11 +37,8 @@ lint:
 	uv sync --group lint
 	uv run ruff format --check && \
 		uv run ruff check && \
-		uv run pyright
-
-	{%- if cookiecutter.docstring_coverage %}
-		uv run interrogate -c pyproject.toml .
-	{%- endif %}
+		uv run pyright{% if cookiecutter.docstring_coverage %} && \
+		uv run interrogate -c pyproject.toml .{% endif %}
 
 .PHONY: format
 format:
