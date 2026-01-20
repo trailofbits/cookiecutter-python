@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-A Cookiecutter template for Python packages, supporting both CLI and library project types. Generates projects with uv, ruff, pyright, and pytest pre-configured. It also comes with GitHub Actions workflows configured for the project.
+A Cookiecutter template for Python packages, supporting both CLI and library project types. Generates projects with uv, ruff, ty, and pytest pre-configured. It also comes with GitHub Actions workflows configured for the project.
 
 This template is opinionated and enforces recommended practices when creating new Python projects.
 
