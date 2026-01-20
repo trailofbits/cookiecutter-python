@@ -22,7 +22,7 @@ dependencies = []
 requires-python = ">=3.10"
 
 [build-system]
-requires = ["uv_build>=0.8.14,<0.9.0"]
+requires = ["uv_build>=0.9.0,<0.10.0"]
 build-backend = "uv_build"
 
 [dependency-groups]
@@ -36,7 +36,7 @@ lint = [
     # NOTE: ruff is under active development, so we pin conservatively here
     # and let Dependabot periodically perform this update.
     "ruff ~= 0.14.0",
-    "ty >=0.0.2",
+    "ty >=0.0.8",
     {%- if cookiecutter.docstring_coverage %}
     "interrogate",
     {%- endif %}
@@ -62,6 +62,9 @@ Source = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.
 [tool.coverage.run]
 # don't attempt code coverage for the CLI entrypoints
 omit = ["{{ cookiecutter.__project_src_path }}/_cli.py"]
+
+[tool.ty.terminal]
+error-on-warning = true
 
 [tool.ty.environment]
 python-version = "3.10"
