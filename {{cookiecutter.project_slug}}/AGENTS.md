@@ -15,7 +15,7 @@ This is a Python library package.
 - Package manager: uv
 - Build backend: uv_build
 - Linting/formatting: ruff
-- Type checking: pyright
+- Type checking: ty
 - Testing: pytest
 - CI: GitHub Actions (lint, test, release{%- if cookiecutter.documentation != 'none' %}, docs{%- endif %})
 
@@ -24,7 +24,7 @@ This is a Python library package.
 Use Makefile targets, not tool commands directly:
 
 - `make format` - Fix formatting issues
-- `make lint` - Run all static checks (ruff, pyright)
+- `make lint` - Run all static checks (ruff, ty)
 - `make test` - Run tests with coverage
 - `make doc` - Generate documentation
 - `make build` - Build the package
