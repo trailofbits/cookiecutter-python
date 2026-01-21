@@ -42,11 +42,3 @@ uvx cookiecutter -o ~/tmp gh:trailofbits/cookiecutter-python
 
 `cookiecutter` will prompt you for the project's name and all other relevant
 metadata.
-
-## Note
-
-The project will be generated using `uv`, a near drop-in replacement for 
-`pip` which is still in active development.
-
-Packages are installed using `uv pip install <package_name>` (after 
-activating the virtual environment).
