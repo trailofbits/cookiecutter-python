@@ -12,20 +12,20 @@ repos:
 
   # Shell script linting
   - repo: https://github.com/koalaman/shellcheck-precommit
-    rev: v0.11.0
+    rev: 99470f5e12208ff0fb17ab81c3c494f7620a1d8d  # frozen: v0.11.0
     hooks:
       - id: shellcheck
         args: [--severity=error]
 
   # GitHub Actions linting
   - repo: https://github.com/rhysd/actionlint
-    rev: v1.7.10
+    rev: 0933c147c9d6587653d45fdcb4c497c57a65f9af  # frozen: v1.7.10
     hooks:
       - id: actionlint
 
   # GitHub Actions security audit
   - repo: https://github.com/zizmorcore/zizmor-pre-commit
-    rev: v1.22.0
+    rev: b546b77c44c466a54a42af5499dcc0dcc1a3193f  # frozen: v1.22.0
     hooks:
       - id: zizmor
         args: [--persona=regular, --min-severity=medium, --min-confidence=medium]
