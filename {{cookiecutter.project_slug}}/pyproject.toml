@@ -19,7 +19,7 @@ classifiers = [
     "Programming Language :: Python :: 3",
 ]
 dependencies = []
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 
 [build-system]
 requires = ["uv_build>=0.9.0,<0.10.0"]
@@ -41,10 +41,12 @@ lint = [
     "interrogate",
     {%- endif %}
 ]
+audit = ["pip-audit"]
 dev = [
     {include-group = "doc"},
     {include-group = "test"},
     {include-group = "lint"},
+    {include-group = "audit"},
     "prek",
 ]
 
@@ -60,25 +62,35 @@ Issues = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.
 Source = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}"
 
 [tool.coverage.run]
+branch = true
 # don't attempt code coverage for the CLI entrypoints
 omit = ["{{ cookiecutter.__project_src_path }}/_cli.py"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "if TYPE_CHECKING:",
+    "if __name__ == .__main__.:",
+]
 
 [tool.ty.terminal]
 error-on-warning = true
 
 [tool.ty.environment]
-python-version = "3.10"
+python-version = "3.11"
 
 [tool.ty.src]
 include = ["src", "test"]
 
 [tool.ruff]
 line-length = 100
-target-version = "py310"
+target-version = "py311"
+src = ["src"]
 
 [tool.ruff.format]
 line-ending = "lf"
 quote-style = "double"
+docstring-code-format = true
 
 [tool.ruff.lint]
 select = ["ALL"]

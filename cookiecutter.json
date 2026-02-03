@@ -31,6 +31,7 @@
     "_copy_without_render": [
         ".github/workflows/docs.yml",
         ".github/workflows/lint.yml",
+        ".github/workflows/pre-commit-autoupdate.yml",
         ".github/workflows/tests.yml",
         ".github/workflows/zizmor.yml"
     ],
