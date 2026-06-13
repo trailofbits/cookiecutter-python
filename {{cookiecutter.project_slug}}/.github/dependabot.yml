@@ -22,3 +22,15 @@ updates:
           - "*"
     schedule:
       interval: daily
+
+  - package-ecosystem: pre-commit
+    cooldown:
+      default-days: 7
+    directories:
+      - /
+    groups:
+      pre-commit:
+        patterns:
+          - "*"
+    schedule:
+      interval: daily
