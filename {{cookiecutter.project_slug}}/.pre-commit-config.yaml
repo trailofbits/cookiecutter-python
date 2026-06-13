@@ -1,5 +1,8 @@
 # Pre-commit hooks for code quality
 # Uses prek (https://github.com/j178/prek) - a faster pre-commit alternative
+default_language_version:
+  python: python3.11
+
 repos:
   - repo: builtin
     hooks:
