@@ -39,6 +39,7 @@ jobs:
 
           git diff --exit-code || { >&2 echo "please format"; exit 1; }
 
+          uv run prek run --all-files
           make lint
           make test
           make build
@@ -57,6 +58,7 @@ jobs:
 
           git diff --exit-code || { >&2 echo "please format"; exit 1; }
 
+          uv run prek run --all-files
           make lint
           make test
           make build
@@ -75,6 +77,7 @@ jobs:
 
           git diff --exit-code || { >&2 echo "please format"; exit 1; }
 
+          uv run prek run --all-files
           make lint
           make test
           make build
@@ -93,6 +96,7 @@ jobs:
 
           git diff --exit-code || { >&2 echo "please format"; exit 1; }
 
+          uv run prek run --all-files
           make lint
           make test
           make build
@@ -112,6 +116,7 @@ jobs:
 
           git diff --exit-code || { >&2 echo "please format"; exit 1; }
 
+          uv run prek run --all-files
           make lint
           make test
           make build
