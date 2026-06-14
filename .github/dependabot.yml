@@ -17,3 +17,15 @@ updates:
           - "*"
     schedule:
       interval: weekly
+
+  - package-ecosystem: pre-commit
+    cooldown:
+      default-days: 7
+    directories:
+      - "{{cookiecutter.project_slug}}"
+    groups:
+      pre-commit:
+        patterns:
+          - "*"
+    schedule:
+      interval: weekly

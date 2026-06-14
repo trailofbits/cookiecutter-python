@@ -39,8 +39,10 @@ jobs:
 
           git diff --exit-code || { >&2 echo "please format"; exit 1; }
 
+          uv run prek run --all-files
           make lint
           make test
+          make audit
           make build
           make doc
           cd .. && rm -rf /tmp/python-project
@@ -57,8 +59,10 @@ jobs:
 
           git diff --exit-code || { >&2 echo "please format"; exit 1; }
 
+          uv run prek run --all-files
           make lint
           make test
+          make audit
           make build
           make doc
           cd .. && rm -rf /tmp/python-project
@@ -75,8 +79,10 @@ jobs:
 
           git diff --exit-code || { >&2 echo "please format"; exit 1; }
 
+          uv run prek run --all-files
           make lint
           make test
+          make audit
           make build
           make doc
           cd .. && rm -rf /tmp/tob-r-and-e-python-project
@@ -93,8 +99,10 @@ jobs:
 
           git diff --exit-code || { >&2 echo "please format"; exit 1; }
 
+          uv run prek run --all-files
           make lint
           make test
+          make audit
           make build
           make doc
           cd .. && rm -rf /tmp/bit-trails
@@ -112,8 +120,10 @@ jobs:
 
           git diff --exit-code || { >&2 echo "please format"; exit 1; }
 
+          uv run prek run --all-files
           make lint
           make test
+          make audit
           make build
           make doc
           cd .. && rm -rf /tmp/python-project

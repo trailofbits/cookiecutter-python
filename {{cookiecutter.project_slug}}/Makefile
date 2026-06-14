@@ -52,6 +52,11 @@ test:
 	uv run pytest -svv --timeout=300 --cov=$(PY_IMPORT) $(T) $(TEST_ARGS)
 	uv run coverage report -m $(COV_ARGS)
 
+.PHONY: audit
+audit:
+	uv sync --group audit
+	uv run pip-audit .
+
 .PHONY: doc
 {%- if cookiecutter.documentation == 'pdoc' %}
 doc:
