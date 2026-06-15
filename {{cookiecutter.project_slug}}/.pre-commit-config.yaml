@@ -22,13 +22,13 @@ repos:
 
   # GitHub Actions linting
   - repo: https://github.com/rhysd/actionlint
-    rev: 0933c147c9d6587653d45fdcb4c497c57a65f9af  # frozen: v1.7.10
+    rev: 914e7df21a07ef503a81201c76d2b11c789d3fca  # frozen: v1.7.12
     hooks:
       - id: actionlint
 
   # GitHub Actions security audit
   - repo: https://github.com/zizmorcore/zizmor-pre-commit
-    rev: b546b77c44c466a54a42af5499dcc0dcc1a3193f  # frozen: v1.22.0
+    rev: 9257c6050c0261b8c57e712f632dc4a8010109a9  # frozen: v1.25.2
     hooks:
       - id: zizmor
         args: [--persona=regular, --min-severity=medium, --min-confidence=medium]
