@@ -41,12 +41,10 @@ lint = [
     "interrogate",
     {%- endif %}
 ]
-audit = ["pip-audit"]
 dev = [
     {include-group = "doc"},
     {include-group = "test"},
     {include-group = "lint"},
-    {include-group = "audit"},
     "prek",
 ]
 

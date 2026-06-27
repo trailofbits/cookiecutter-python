@@ -54,8 +54,7 @@ test:
 
 .PHONY: audit
 audit:
-	uv sync --group audit
-	uv run pip-audit .
+	uv audit
 
 .PHONY: doc
 {%- if cookiecutter.documentation == 'pdoc' %}
