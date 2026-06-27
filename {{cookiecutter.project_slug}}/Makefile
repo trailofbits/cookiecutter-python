@@ -1,5 +1,3 @@
-SHELL := /bin/bash
-
 PY_IMPORT = {{ cookiecutter.__project_import }}
 
 # Optionally overridden by the user in the `test` target.
