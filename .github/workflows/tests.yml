@@ -87,6 +87,28 @@ jobs:
           make doc
           cd .. && rm -rf /tmp/tob-r-and-e-python-project
 
+      - name: run template (namespace, library)
+        run: |
+          uvx cookiecutter --no-input -o /tmp . project_namespace_import=tob.r_and_e repo_type=library
+
+          [[ -d /tmp/tob-r-and-e-python-project/src/tob/r_and_e/python_project ]] || { >&2 echo "not generated?"; exit 1; }
+          [[ ! -f /tmp/tob-r-and-e-python-project/src/tob/r_and_e/python_project/_cli.py ]] || { >&2 echo "not expecting CLI module"; exit 1; }
+          [[ ! -f /tmp/tob-r-and-e-python-project/src/tob/r_and_e/python_project/__main__.py ]] || { >&2 echo "not expecting main module"; exit 1; }
+
+          cd /tmp/tob-r-and-e-python-project
+          git init . && git add . && git commit -m "Initial commit"
+          make format
+
+          git diff --exit-code || { >&2 echo "please format"; exit 1; }
+
+          uv run prek run --all-files
+          make lint
+          make test
+          make audit
+          make build
+          make doc
+          cd .. && rm -rf /tmp/tob-r-and-e-python-project
+
       - name: run template (namespace, short slug)
         run: |
           uvx cookiecutter --no-input -o /tmp . project_namespace_import=tob.r_and_e "project_name=Bit Trails" project_slug=bit-trails

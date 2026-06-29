@@ -1,5 +1,3 @@
-SHELL := /bin/bash
-
 PY_IMPORT = {{ cookiecutter.__project_import }}
 
 # Optionally overridden by the user in the `test` target.
@@ -54,8 +52,7 @@ test:
 
 .PHONY: audit
 audit:
-	uv sync --group audit
-	uv run pip-audit .
+	uv audit
 
 .PHONY: doc
 {%- if cookiecutter.documentation == 'pdoc' %}
